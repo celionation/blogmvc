@@ -18,3 +18,4 @@ use src\controllers\SiteController;
 /** @var TYPE_NAME $app */
 
 $app->router->get('/', [SiteController::class, 'index']);
+$app->router->get('/news', [SiteController::class, 'news']);

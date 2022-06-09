@@ -1,5 +1,10 @@
 <?php
 
+
+$this->title = 'Welcome Page';
+
+
 ?>
 
-<h1>Blog Home Page By <?= $name ?></h1>
+<?php \core\helpers\CoreHelpers::dnd($name); ?>
+<h1>Blog Home Page By <?= $name->fname ?></h1>

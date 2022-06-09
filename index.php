@@ -2,11 +2,14 @@
 
 //define constant
 use core\Application;
+use core\Config;
 use Symfony\Component\Dotenv\Dotenv;
 
 const PROOT = __DIR__;
 const DS = DIRECTORY_SEPARATOR;
 const TimeZone = 'Africa/Lagos';
+
+const ROOT = '/';
 
 require_once __DIR__ . '/config/functions.php';
 
