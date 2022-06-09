@@ -15,7 +15,7 @@ class SiteController extends Controller
     public function index(): View
     {
         $view = [
-            'name' => Users::findFirst(),
+            'name' => 'celio natti',
         ];
 
         return View::make('blog/home', $view);
