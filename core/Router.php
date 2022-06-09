@@ -107,18 +107,15 @@ class Router
 
         if (is_array($callback)) {
 
-            [$class, $method] = $callback;
+            /**
+             * @var $controller Controller
+             */
+            $controller = new $callback[0];
+            $controller->action = $callback[1];
+            Application::$app->controller = $controller;
 
-            if (class_exists($class)) {
-                /** @var $controller Controller */
-                $controller = $class;
-                Application::$app->controller = $controller;
-
-                if (method_exists($class, $method)) {
-                    return call_user_func_array([$class, $method], [$this->request, $this->response]);
-                }
-            }
+            $callback[0] = $controller;
         }
-        throw new Exception(Errors::get('1000'), 1000);
+        return call_user_func($callback, $this->request, $this->response);
     }
 }

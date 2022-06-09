@@ -8,6 +8,8 @@ const PROOT = __DIR__;
 const DS = DIRECTORY_SEPARATOR;
 const TimeZone = 'Africa/Lagos';
 
+require_once __DIR__ . '/config/functions.php';
+
 require_once(PROOT . DS . 'lib/dotenv/Dotenv.php');
 require_once(PROOT . DS . 'lib/dotenv/Exception/ExceptionInterface.php');
 require_once(PROOT . DS . 'lib/dotenv/Exception/FormatException.php');
