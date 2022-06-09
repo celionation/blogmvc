@@ -30,4 +30,13 @@ $dotenv = new Dotenv();
 $dotenv->load(PROOT . DS . '.env');
 
 // Initialize the Application
-$app = new Application();
+$app = new Application(__DIR__);
+
+$app->on(Application::EVENT_BEFORE_REQUEST, function () {
+    // echo "Before request from second installation </br>";
+});
+
+
+require __DIR__ . '/routes/web.php';
+
+$app->run();
