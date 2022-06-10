@@ -10,7 +10,7 @@ use core\helpers\Navigation;
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
-            <img src="<?= ROOT ?>app/assets/img/logocolor.jpg" alt="NattiFlash" style="width: 65px; width: 65px;">
+            <img src="/assets/img/logocolor.jpg" alt="NattiFlash" style="width: 65px; width: 65px;">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,20 +18,20 @@ use core\helpers\Navigation;
         </button>
         <div class="collapse navbar-collapse text-center" id="navbarCollapse">
             <ul class="navbar-nav mx-auto mb-2 mb-md-0">
-                <?= Navigation::navItem('blog', 'Home') ?>
-                <?= Navigation::navItem('blog/news', 'News') ?>
-                <?= Navigation::navItem('blog/sports', 'Sports') ?>
-                <?= Navigation::navItem('blog/entertainment', 'Entertainment') ?>
-                <?= Navigation::navItem('page/contact', 'Contact') ?>
-                <?= Navigation::navItem('page/contact', 'Magazine') ?>
+                <?= Navigation::navItem('', 'Home') ?>
+                <?= Navigation::navItem('news', 'News') ?>
+                <?= Navigation::navItem('sports', 'Sports') ?>
+                <?= Navigation::navItem('entertainment', 'Entertainment') ?>
+                <?= Navigation::navItem('contact', 'Contact') ?>
+                <?= Navigation::navItem('contact', 'Magazine') ?>
             </ul>
             <ul class="navbar-nav mx-end mb-2 mb-md-0">
                 <li class="nav-item">
                     <a class="nav-link" id="search-btn"><span class="fas fa-search"></span></a>
                 </li>
                 <?php if(!$currentUser): ?>
-                    <?= Navigation::navItem('auth/login', 'Sign In') ?>
-                    <?= Navigation::navItem('auth/register', 'Sign Up') ?>
+                    <?= Navigation::navItem('login', 'Sign In') ?>
+                    <?= Navigation::navItem('register', 'Sign Up') ?>
                 <?php endif; ?>
 
                 <?php if($currentUser): ?>
@@ -47,7 +47,7 @@ use core\helpers\Navigation;
                                     <hr class="dropdown-divider text-danger">
                                 </li>
                             <?php endif ?>
-                            <?= Navigation::navItem('auth/logout', 'Log Out', true); ?>
+                            <?= Navigation::navItem('logout', 'Log Out', true); ?>
                         </ul>
                     </li>
                 <?php endif; ?>

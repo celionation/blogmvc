@@ -15,41 +15,24 @@ use Exception;
 
 class GenerateToken
 {
-    public static $seed;
-    public static $time;
-    public static $hash;
+    public static function createToken()
+    {
+        //Generate a random string.
+        $token = openssl_random_pseudo_bytes(16);
+        return bin2hex($token);
+    }
 
     /**
      * @throws Exception
      */
-    public static function CreateToken(): string
+    public static function rand_str()
     {
-        self::$seed = random_bytes(8);
-        self::$time = time();
-        self::$hash = hash_hmac('sha256', session_id() . self::$seed . self::$time, Config::get('CSRF_TOKEN_SECRET'), true);
-        return self::UrlSafeEncode(self::$hash . '|' . self::$seed . '|' . self::$time);
-    }
-
-    public static function ValidateToken($token): bool
-    {
-        $parts = explode('|', self::urlSafeDecode($token));
-        if (count($parts) === 3) {
-            $hash = hash_hmac('sha256', session_id() . $parts[1] . $parts[2], Config::get('CSRF_TOKEN_SECRET'), true);
-            if (hash_equals($hash, self::urlSafeDecode($parts[0]))) {
-                return true;
-            }
+        $characters = '0123456789-=+{}[]:;@#~.?/&gt;,&lt;|\!"£$%^&amp;*()abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $randomStr = '';
+        for ($i = 0; $i < random_int(50, 100); $i++) {
+            $randomStr .= $characters[rand(0, strlen($characters) - 1)];
         }
-        return false;
-    }
-
-    public static function UrlSafeEncode($m): string
-    {
-        return rtrim(strtr(base64_encode($m), '+/', '-_'), '=');
-    }
-
-    public static function UrlSafeDecode($m)
-    {
-        return base64_decode(strtr($m, '-_', '+/'));
+        return $randomStr;
     }
 
     public static function randomString($length): string

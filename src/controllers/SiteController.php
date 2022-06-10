@@ -9,6 +9,11 @@ use src\models\Users;
 
 class SiteController extends Controller
 {
+    public function __construct()
+    {
+        $this->setLayout('blog');
+    }
+
     /**
      * @throws Exception
      */

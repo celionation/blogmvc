@@ -165,7 +165,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="footer_logo text-white">
-                            <img src="<?= ROOT ?>app/assets/img/logocolor.jpg" alt="" style="width: 65px; width: 65px;">
+                            <img src="/assets/img/logocolor.jpg" alt="" style="width: 65px; width: 65px;">
                         </div>
                     </div>
                 </div>

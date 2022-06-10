@@ -41,7 +41,7 @@ class Session
      */
     public static function createCsrfToken()
     {
-        $token = GenerateToken::CreateToken();
+        $token = GenerateToken::createToken();
         self::set('_token', $token);
         return $token;
     }

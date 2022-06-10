@@ -10,26 +10,28 @@ use Exception;
 class Database
 {
     protected $_results, $_lastInsertId, $_rowCount = 0, $_fetchType = \PDO::FETCH_OBJ, $_class, $_error = false;
-    protected \PDO $_dbh;
+    public \PDO $_dbh;
     protected $_stmt;
     protected static $_db;
 
     /**
      * @throws Exception
      */
-    public function __construct()
+    public function __construct(array $config = [])
     {
-        $drivers = Config::get('DB_DRIVERS');
-        $host = Config::get('DB_HOST');
-        $port = Config::get('DB_PORT');
-        $name = Config::get('DB_DATABASE');
-        $user = Config::get('DB_USERNAME');
-        $pass = Config::get('DB_PASSWORD');
-        $db_activate = Config::get('DB_ACTIVATE');
+        $drivers = $config['drivers'] ?? '';
+        $host = $config['host'] ?? '';
+        $port = $config['port'] ?? '';
+        $name = $config['database'] ?? '';
+        $user = $config['username'] ?? '';
+        $pass = $config['password'] ?? '';
+        $db_activate = $config['activate'] ?? '';
         $options = [
             \PDO::ATTR_EMULATE_PREPARES => false,
+            \PDO::ATTR_PERSISTENT => true,
             \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
-            \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_OBJ
+            \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_OBJ,
+            \PDO::MYSQL_ATTR_INIT_COMMAND => 'SET CHARACTER SET UTF8',
         ];
         if (strtolower($db_activate) == 'true') {
             try {
@@ -87,6 +89,9 @@ class Database
         return $this;
     }
 
+    /**
+     * @throws Exception
+     */
     public function insert($table, $values)
     {
         $fields = [];
@@ -102,6 +107,9 @@ class Database
         return !$this->_error;
     }
 
+    /**
+     * @throws Exception
+     */
     public function update($table, $values, $conditions)
     {
         $binds = [];
@@ -194,7 +202,7 @@ class Database
 
     protected function createMigrationsTable()
     {
-        $this->pdo->exec("CREATE TABLE IF NOT EXISTS migrations (
+        $this->_dbh->exec("CREATE TABLE IF NOT EXISTS migrations (
             id INT AUTO_INCREMENT PRIMARY KEY,
             migration VARCHAR(255),
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -203,7 +211,7 @@ class Database
 
     protected function getAppliedMigrations()
     {
-        $statement = $this->pdo->prepare("SELECT migration FROM migrations");
+        $statement = $this->_dbh->prepare("SELECT migration FROM migrations");
         $statement->execute();
 
         return $statement->fetchAll(\PDO::FETCH_COLUMN);
@@ -212,7 +220,7 @@ class Database
     protected function saveMigrations(array $newMigrations)
     {
         $str = implode(',', array_map(fn ($m) => "('$m')", $newMigrations));
-        $statement = $this->pdo->prepare("INSERT INTO migrations (migration) VALUES 
+        $statement = $this->_dbh->prepare("INSERT INTO migrations (migration) VALUES 
             $str
         ");
         $statement->execute();
@@ -220,7 +228,7 @@ class Database
 
     public function prepare($sql): \PDOStatement
     {
-        return $this->pdo->prepare($sql);
+        return $this->_dbh->prepare($sql);
     }
 
     private function log($message)
@@ -230,7 +238,7 @@ class Database
 
     public function __call(string $name, array $arguments)
     {
-        return call_user_func_array([$this->pdo, $name], $arguments);
+        return call_user_func_array([$this->_dbh, $name], $arguments);
     }
 
 }

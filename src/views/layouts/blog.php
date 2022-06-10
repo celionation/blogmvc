@@ -26,9 +26,11 @@ use core\Config;
 </head>
 <body>
 
+<?= component('BlogNavbar') ?>
 <div>
     {{content}}
 </div>
+<?= component('BlogFooter') ?>
 
 <script type="application/javascript" src="<?= asset('/assets/vendor/jquery/jquery.min.js') ?>"></script>
 <script type="application/javascript" src="<?= asset('/assets/js/bootstrap.bundle.min.js') ?>"></script>

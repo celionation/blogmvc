@@ -65,7 +65,7 @@ class View
         }
     }
 
-    public function partial($path)
+    public static function partial($path)
     {
         $fullPath = Application::$ROOT_DIR . "/src/views/$path.php";
         if (file_exists($fullPath)) {

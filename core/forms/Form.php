@@ -3,6 +3,7 @@
 namespace core\forms;
 
 use core\Session;
+use Exception;
 
 /**
  * Class Form

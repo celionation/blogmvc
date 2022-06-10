@@ -7,11 +7,7 @@ use Symfony\Component\Dotenv\Dotenv;
 
 const PROOT = __DIR__;
 const DS = DIRECTORY_SEPARATOR;
-const TimeZone = 'Africa/Lagos';
 
-const ROOT = '/';
-
-require_once __DIR__ . '/config/functions.php';
 
 require_once(PROOT . DS . 'lib/dotenv/Dotenv.php');
 require_once(PROOT . DS . 'lib/dotenv/Exception/ExceptionInterface.php');
@@ -34,11 +30,7 @@ spl_autoload_register(function ($classname){
 $dotenv = new Dotenv();
 $dotenv->load(PROOT . DS . '.env');
 
-error_reporting(E_ALL);
-ini_set('display_errors', Config::get('APP_DEBUG'));
-
 $config = [
-    'dsn' => Config::get('MAILER_DSN') ?? '',
     'db' => [
         'drivers' => Config::get('DB_DRIVERS') ?? 'mysql',
         'host' => Config::get('DB_HOST'),
@@ -57,11 +49,4 @@ try {
     echo $e;
 }
 
-$app->on(Application::EVENT_BEFORE_REQUEST, function () {
-    // echo "Before request from second installation </br>";
-});
-
-
-require __DIR__ . '/routes/web.php';
-
-$app->run();
+$app->db->applyMigrations();

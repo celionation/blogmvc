@@ -31,7 +31,10 @@ class Application
     public Database $db;
     public Session $session;
 
-    public function __construct($rootDir)
+    /**
+     * @throws Exception
+     */
+    public function __construct($rootDir, array $config)
     {
         self::$app = $this;
         self::$ROOT_DIR = $rootDir;
@@ -39,7 +42,7 @@ class Application
         $this->request = new Request();
         $this->response = new Response();
         $this->router = new Router($this->request, $this->response);
-        $this->db = new Database();
+        $this->db = new Database($config['db']);
     }
 
 
