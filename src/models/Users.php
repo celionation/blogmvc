@@ -15,9 +15,9 @@ use Exception;
 
 class Users extends Model
 {
+    protected static $_current_user = false;
     protected static string $table = "users";
-    protected static bool $_current_user = false;
-    public $user_id, $created_at, $updated_at, $fullname, $fname, $lname, $email, $password, $acl = 'guests', $img, $terms = 0, $verified = 0, $blocked = 0, $remember = '', $ref_link, $state, $country, $address, $gender;
+    public $id, $created_at, $updated_at, $username, $fname, $lname, $user_id, $email, $img, $password, $confirmPassword, $acl = 'guests', $gender = 'others', $ref_link, $state, $country, $address, $blocked = 0, $terms = 0, $verified = 0, $remember = '';
 
     const AUTHOR_PERMISSION = 'author';
     const ADMIN_PERMISSION = 'admin';
@@ -32,11 +32,11 @@ class Users extends Model
     {
         $this->timeStamps();
 
-        $this->runValidation(new RequiredValidator($this, ['field' => 'fullname', 'msg' => 'FullName is required']));
+        $this->runValidation(new RequiredValidator($this, ['field' => 'username', 'msg' => 'UserName is required']));
 
         $this->runValidation(new RequiredValidator($this, ['field' => 'email', 'msg' => 'E-Mail is required']));
         $this->runValidation(new EmailValidator($this, ['field' => 'email', 'msg' => 'You must provide a valid E-Mail.']));
-        $this->runValidation(new UniqueValidator($this, ['field' => ['email', 'fullname'], 'msg' => 'User with E-Mail Already Exists.']));
+        $this->runValidation(new UniqueValidator($this, ['field' => ['email', 'username'], 'msg' => 'User with E-Mail Already Exists.']));
 
         if ($this->isNew()) {
             $this->runValidation(new RequiredValidator($this, ['field' => 'password', 'msg' => 'Password is a required Field']));
@@ -162,7 +162,7 @@ class Users extends Model
 
     public function displayName(): string
     {
-        return trim($this->fullname);
+        return trim($this->username);
     }
 
 }

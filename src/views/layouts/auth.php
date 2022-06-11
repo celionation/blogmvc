@@ -2,6 +2,7 @@
 
 
 use core\Config;
+use core\Session;
 
 
 ?>
@@ -24,7 +25,7 @@ use core\Config;
     <title>Laraton Blog MVC | <?= $this->title ?></title>
 </head>
 <body>
-
+<?= Session::displaySessionAlerts() ?>
     {{content}}
 
 <script type="application/javascript" src="<?= asset('/assets/js/bootstrap.bundle.min.js') ?>"></script>

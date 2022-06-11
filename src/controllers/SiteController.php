@@ -9,7 +9,7 @@ use src\models\Users;
 
 class SiteController extends Controller
 {
-    public function __construct()
+    public function onConstruct()
     {
         $this->setLayout('blog');
     }
@@ -26,12 +26,4 @@ class SiteController extends Controller
         return View::make('blog/home', $view);
     }
 
-    public function news(): View
-    {
-        $view = [
-            'name' => 'Celio Natti',
-        ];
-
-        return View::make('blog/news', $view);
-    }
 }

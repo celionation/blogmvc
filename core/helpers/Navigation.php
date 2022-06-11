@@ -33,4 +33,17 @@ class Navigation
         $html .= "</li>";
         return $html;
     }
+
+    public static function navItemIcon($link, $label, $icon = '', $isDropdownItem = false): string
+    {
+        $active = self::isCurrentPage($link);
+        $class = self::activeClass($link);
+        $linkClass = $isDropdownItem ? 'dropdown-item' : 'nav-link';
+        $linkClass .= $active && $isDropdownItem ? " active" : "";
+        $link =  '/' . $link;
+        $html = "<li class=\"nav-item\">";
+        $html .= "<a class=\"{$linkClass}{$class}\" href=\"{$link}\" ><i class=\"{$icon}\"></i><span>{$label}</span></a>";
+        $html .= "</li>";
+        return $html;
+    }
 }

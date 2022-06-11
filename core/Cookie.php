@@ -12,7 +12,7 @@ class Cookie
         return false;
     }
 
-    public static function set($name, $value, $expiry): bool
+    public static function set($name, $value, $expiry)
     {
         if (setCookie($name, $value, time() + $expiry, '/', "", false, true)) {
             return true;

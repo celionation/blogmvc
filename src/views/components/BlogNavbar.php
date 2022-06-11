@@ -21,9 +21,8 @@ use core\helpers\Navigation;
                 <?= Navigation::navItem('', 'Home') ?>
                 <?= Navigation::navItem('news', 'News') ?>
                 <?= Navigation::navItem('sports', 'Sports') ?>
-                <?= Navigation::navItem('entertainment', 'Entertainment') ?>
                 <?= Navigation::navItem('contact', 'Contact') ?>
-                <?= Navigation::navItem('contact', 'Magazine') ?>
+                <?= Navigation::navItem('magazine', 'Magazine') ?>
             </ul>
             <ul class="navbar-nav mx-end mb-2 mb-md-0">
                 <li class="nav-item">
@@ -38,7 +37,7 @@ use core\helpers\Navigation;
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" id="accountDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                             <?php /** @var mixed $currentUser */ ?>
-                            <span class="text-danger">Hi</span> <?= $currentUser->fname ?? 'Guests'; ?>
+                            <span class="text-danger">Hi</span> <?= $currentUser->username ?? 'Guests'; ?>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
                             <?php if ($currentUser->acl !== 'guests') : ?>

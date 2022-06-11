@@ -9,7 +9,7 @@ use core\forms\Form;
 
 <div class="col-12 col-lg-4 col-md-4 col-sm-12">
     <div class="card mb-2">
-        <img src="/assets/assets/img/tags/travel-tag.jpg" alt="" class="w-100 img-fluid rounded-3">
+        <img src="/assets/img/older_posts/older_posts_6.jpg" alt="" class="w-100 img-fluid rounded-3">
     </div>
     <div class="card">
         <h2 class="text-shadow h4 text-uppercase rounded-3 text-center border-bottom border-3 border-danger pb-2">

@@ -8,7 +8,8 @@ use core\helpers\Navigation;
 ?>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="#">Start Bootstrap</a>
+<!--    <a class="navbar-brand" href="#">CN<span class="text-danger">Blog</span></a>-->
+    <a class="navbar-brand" href="#"><img src="/assets/img/logocolor.jpg" alt="NattiFlash" style="width: 65px; width: 65px;"></a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -30,12 +31,7 @@ use core\helpers\Navigation;
                     <?= Navigation::navItem('admin/article/new', 'New Article', true) ?>
                 </ul>
             </li>
-            <li class="nav-item" data-bs-toggle="tooltip" data-placement="right" title="Comments">
-                <a class="nav-link" href="/admin/comments">
-                    <i class="fa fa-fw fa-comments"></i>
-                    <span class="nav-link-text">Comments</span>
-                </a>
-            </li>
+            <?= Navigation::navItemIcon('admin/comments', 'Comments', 'fa fa-fw fa-comments') ?>
             <?php if ($currentUser->hasPermission('admin')) : ?>
                 <li class="nav-item" data-bs-toggle="tooltip" data-placement="right" title="Users">
                     <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#users" data-parent="#exampleAccordion">
@@ -44,7 +40,7 @@ use core\helpers\Navigation;
                     </a>
                     <ul class="sidenav-second-level collapse" id="users">
                         <?= Navigation::navItem('admin/users', 'Users', true) ?>
-                        <?= Navigation::navItem('admin/register', 'New User', true) ?>
+                        <?= Navigation::navItem('admin/create_user/new', 'New User', true) ?>
                     </ul>
                 </li>
                 <li class="nav-item" data-bs-toggle="tooltip" data-placement="right" title="Category & Region">
@@ -53,8 +49,21 @@ use core\helpers\Navigation;
                         <span class="nav-link-text">Categories & Region</span>
                     </a>
                     <ul class="sidenav-second-level collapse" id="category">
-                        <?= Navigation::navItem('admin/categories', 'Categories', true) ?>
-                        <?= Navigation::navItem('admin/regions', 'Regions', true) ?>
+                        <?= Navigation::navItem('admin/categories/new', 'Categories', true) ?>
+                        <?= Navigation::navItem('admin/regions/new', 'Regions', true) ?>
+                    </ul>
+                </li>
+
+                <?= Navigation::navItemIcon('admin/contact_messages', 'Contact Message', 'fa fa-fw fa-envelope') ?>
+
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                    <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#newsletter" data-parent="#exampleAccordion">
+                        <i class="fa fa-fw fa-mail-bulk"></i>
+                        <span class="nav-link-text">NewsLetters</span>
+                    </a>
+                    <ul class="sidenav-second-level collapse" id="newsletter">
+                        <?= Navigation::navItem('admin/newsletter/mail', 'Send Emails to Subscribers', true) ?>
+                        <?= Navigation::navItem('admin/newsletter/subscribers', 'Subscribers', true) ?>
                     </ul>
                 </li>
             <?php endif; ?>
@@ -64,24 +73,13 @@ use core\helpers\Navigation;
                     <span class="nav-link-text">Mailbox</span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="mailbox">
-                    <li>
-                        <a href="/admin/mailbox/inbox">Inbox</a>
-                    </li>
-                    <li>
-                        <a href="/admin/mailbox/compose">Compose</a>
-                    </li>
-                    <li>
-                        <a href="/admin/mailbox/read">Read</a>
-                    </li>
+                    <?= Navigation::navItem('admin/mailbox/inbox', 'Inbox', true) ?>
+                    <?= Navigation::navItem('admin/mailbox/compose', 'Compose', true) ?>
+                    <?= Navigation::navItem('admin/mailbox/read', 'Read', true) ?>
                 </ul>
             </li>
 
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
-                <a class="nav-link" href="/admin/settings">
-                    <i class="fa fa-fw fa-cog"></i>
-                    <span class="nav-link-text">Settings</span>
-                </a>
-            </li>
+            <?= Navigation::navItemIcon('admin/settings', 'Settings', 'fa fa-fw fa-cog') ?>
         </ul>
         <!-- End of Side Bar -->
 

@@ -87,7 +87,7 @@ class Model
     /**
      * @throws Exception
      */
-    public static function findTotal($params = []): int
+    public static function findTotal($params = [])
     {
         unset($params['limit']);
         unset($params['offset']);
@@ -101,7 +101,7 @@ class Model
     }
 
 
-    public function save(): bool
+    public function save()
     {
         $save = false;
         $this->beforeSave();
@@ -163,7 +163,7 @@ class Model
         return empty($this->id);
     }
 
-    public static function selectBuilder($params = []): array
+    public static function selectBuilder($params = [])
     {
         $columns = array_key_exists('columns', $params) ? $params['columns'] : "*";
         $table = static::$table;
@@ -173,7 +173,7 @@ class Model
         return ['sql' => $sql, 'bind' => $bind];
     }
 
-    public static function queryParamBuilder($params = []): array
+    public static function queryParamBuilder($params = [])
     {
         $sql = "";
         $bind = array_key_exists('bind', $params) ? $params['bind'] : [];
@@ -222,7 +222,7 @@ class Model
         return ['sql' => $sql, 'bind' => $bind];
     }
 
-    public function getValuesForSave(): array
+    public function getValuesForSave()
     {
         $columns = static::getColumns();
         $values = [];
@@ -238,7 +238,7 @@ class Model
      * @return array
      * @throws Exception
      */
-    public static function getColumns(): array
+    public static function getColumns()
     {
         if (!static::$columns) {
             $db = static::getDb();
@@ -263,7 +263,7 @@ class Model
         }
     }
 
-    public function getErrors(): array
+    public function getErrors()
     {
         return $this->_errors;
     }

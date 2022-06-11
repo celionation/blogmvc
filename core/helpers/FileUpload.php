@@ -8,7 +8,7 @@ class FileUpload
     public $size, $tmp, $ext, $name;
     public $maxSize = 2000000;
     public $allowedFileTypes = ['jpg' => 'image/jpeg', 'png' => 'image/png', 'gif' => 'image/gif'];
-    private $directory = "app/uploads"; // default upload folder
+    private $directory = ""; // default upload folder
     public $required = true;
 
     public function __construct($field)
@@ -66,6 +66,7 @@ class FileUpload
 
     private function destination()
     {
+        $this->d = "";
         $this->d = $this->get_dir() . DIRECTORY_SEPARATOR;
         $this->d .= $this->get_name();
         $this->d .= "." . $this->ext;

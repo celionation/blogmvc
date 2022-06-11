@@ -3,6 +3,7 @@
 //define constant
 use core\Application;
 use core\Config;
+use src\models\Users;
 use Symfony\Component\Dotenv\Dotenv;
 
 const PROOT = __DIR__;
@@ -61,6 +62,23 @@ $app->on(Application::EVENT_BEFORE_REQUEST, function () {
     // echo "Before request from second installation </br>";
 });
 
+try {
+    $currentUser = Users::getCurrentUser();
+} catch (Exception $e) {
+    echo $e;
+}
+
+$url = $_SERVER['REQUEST_URI'];
+if (ROOT != '/') {
+    $url = str_replace(ROOT, '', $url);
+} else {
+    $url = ltrim($url, '/');
+}
+$url = preg_replace('/(\?.+)/', '', $url);
+
+$currentPage = $url;
+
+//\core\helpers\CoreHelpers::dnd($currentPage);
 
 require __DIR__ . '/routes/web.php';
 

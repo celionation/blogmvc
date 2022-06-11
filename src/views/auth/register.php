@@ -20,7 +20,7 @@ $this->title = 'Register';
             <form action="" method="post">
                 <?= Form::csrfField() ?>
                 <div class="inputBox">
-                    <?= Form::inputField('Fullname', 'fullname', $user->fullname, ['type' => 'text'], [], $errors) ?>
+                    <?= Form::inputField('Username', 'username', $user->username, ['type' => 'text'], [], $errors) ?>
                 </div>
                 <div class="inputBox">
                     <?= Form::inputField('E-mail', 'email', $user->email, ['type' => 'email'], [], $errors) ?>

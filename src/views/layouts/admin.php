@@ -2,6 +2,7 @@
 
 
 use core\Config;
+use core\Session;
 
 
 ?>
@@ -64,10 +65,16 @@ use core\Config;
         }
     </style>
 </head>
-<body>
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
 
-<div>
-    {{content}}
+<?= component('admin/Navbar') ?>
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <?= component('admin/Crumbs') ?>
+        <?= Session::displaySessionAlerts() ?>
+        {{content}}
+        <?= component('admin/Footer') ?>
+    </div>
 </div>
 
 <script type="application/javascript" src="<?= asset('/assets/vendor/jquery/jquery.min.js') ?>"></script>
