@@ -67,7 +67,12 @@ $app->router->get('/admin/comment_view/{id}', [AdminController::class, 'commentV
 $app->router->get('/admin/settings', [AdminController::class, 'settings']);
 $app->router->post('/admin/settings', [AdminController::class, 'settings']);
 $app->router->get('/admin/settings/social', [AdminController::class, 'socialSettings']);
+$app->router->post('/admin/settings/social', [AdminController::class, 'socialSettings']);
 $app->router->get('/admin/settings/email', [AdminController::class, 'emailSettings']);
+$app->router->post('/admin/settings/email', [AdminController::class, 'emailSettings']);
+$app->router->get('/admin/settings/fields', [AdminController::class, 'fieldsSettings']);
+$app->router->post('/admin/settings/fields', [AdminController::class, 'fieldsSettings']);
+$app->router->get('/admin/settings/fields/{id}', [AdminController::class, 'delete_field']);
 
 // Mailbox Actions
 $app->router->get('/admin/mailbox/read', [MailboxController::class, 'read']);

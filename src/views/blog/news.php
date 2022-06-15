@@ -19,7 +19,9 @@ $total = $this->total;
                 <?php foreach ($articles as $article) : ?>
                     <div class="card rounded-4 mt-2">
                         <div class="card">
-                            <img src="<?= $article->img ?>" alt="" class="w-100 " height="600px">
+                            <div class="thumbnail">
+                                <img src="<?= $article->img ?>" alt="" class="w-100">
+                            </div>
                             <div class="card-header">
                                 <a href="#" class="text-dark">
                                     <h2 class="text-shadow h2 text-capitalize border-bottom border-3 border-danger pb-2">

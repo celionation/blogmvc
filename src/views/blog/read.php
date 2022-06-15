@@ -18,7 +18,9 @@ global $currentUser;
     <div class="row mb-3">
         <div class="col-12 col-lg-8 col-md-8 col-sm-12">
             <div class="card">
-                <img src="<?= '/' . $article->img ?>" alt="" class="w-100 img-fluid rounded-2">
+                <div class="thumbnail_read">
+                    <img src="<?= '/' . $article->img ?>" alt="" class="w-100 img-fluid rounded-2">
+                </div>
                 <div class="card-header">
                     <h2 class="text-shadow h4 text-capitalize border-bottom border-top border-3 border-danger pb-2"><?= html_entity_decode($article->title) ?></h2>
                     <div class="info border-bottom border-3 border-danger pb-2 d-flex justify-content-around align-items-center">

@@ -15,12 +15,7 @@ use core\helpers\Navigation;
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-            <li class="nav-item" data-bs-toggle="tooltip" data-placement="right" title="Dashboard">
-                <a class="nav-link" href="/admin/dashboard">
-                    <i class="fa fa-fw fa-dashboard"></i>
-                    <span class="nav-link-text">Dashboard</span>
-                </a>
-            </li>
+            <?= Navigation::navItemIcon('admin/dashboard', 'Dashboard', 'fa fa-fw fa-dashboard') ?>
             <li class="nav-item" data-bs-toggle="tooltip" data-placement="right" title="Articles">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#article" data-parent="#exampleAccordion">
                     <i class="fa fa-fw fa-newspaper"></i>
@@ -56,7 +51,7 @@ use core\helpers\Navigation;
 
                 <?= Navigation::navItemIcon('admin/contact_messages', 'Contact Message', 'fa fa-fw fa-envelope') ?>
 
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                <li class="nav-item" data-bs-toggle="tooltip" data-placement="right" title="NewsLetters">
                     <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#newsletter" data-parent="#exampleAccordion">
                         <i class="fa fa-fw fa-mail-bulk"></i>
                         <span class="nav-link-text">NewsLetters</span>
@@ -67,7 +62,7 @@ use core\helpers\Navigation;
                     </ul>
                 </li>
             <?php endif; ?>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+            <li class="nav-item" data-bs-toggle="tooltip" data-placement="right" title="Mailbox">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#mailbox" data-parent="#exampleAccordion">
                     <i class="fa fa-fw fa-envelope-open-text"></i>
                     <span class="nav-link-text">Mailbox</span>

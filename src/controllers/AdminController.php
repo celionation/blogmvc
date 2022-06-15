@@ -51,7 +51,7 @@ class AdminController extends Controller
      */
     public function articles()
     {
-        Permission::permRedirect(['admin', 'author'], 'admin');
+        Permission::permRedirect(['admin', 'author'], 'admin/dashboard');
 
         if($this->currentUser->acl == 'admin') {
             $params = [
@@ -90,7 +90,7 @@ class AdminController extends Controller
      */
     public function article(Request $request)
     {
-        Permission::permRedirect(['admin', 'author'], 'admin');
+        Permission::permRedirect(['admin', 'author'], 'admin/dashboard');
 
         $id = $request->getParam('id');
 
@@ -165,7 +165,7 @@ class AdminController extends Controller
      */
     public function deleteArticle(Request $request)
     {
-        Permission::permRedirect(['admin', 'author'], 'admin');
+        Permission::permRedirect(['admin', 'author'], 'admin/dashboard');
 
         $id = $request->getParam('id');
 
@@ -287,7 +287,7 @@ class AdminController extends Controller
      */
     public function users()
     {
-        Permission::permRedirect(['admin'], 'admin');
+        Permission::permRedirect(['admin'], 'admin/dashboard');
         $params = ['order' => 'lname', 'fname'];
         $params = Users::mergeWithPagination($params);
 
@@ -304,7 +304,7 @@ class AdminController extends Controller
      */
     public function createUser(Request $request)
     {
-        Permission::permRedirect(['admin'], 'admin');
+        Permission::permRedirect(['admin'], 'admin/dashboard');
 
         $id = $request->getParam('id');
 
@@ -371,7 +371,7 @@ class AdminController extends Controller
      */
     public function comments()
     {
-        Permission::permRedirect(['admin', 'author'], 'admin');
+        Permission::permRedirect(['admin', 'author'], 'admin/dashboard');
 
         if ($this->currentUser->acl == 'admin') {
             $params = [
@@ -409,7 +409,7 @@ class AdminController extends Controller
      */
     public function commentDelete(Request $request)
     {
-        Permission::permRedirect(['admin', 'author'], 'admin');
+        Permission::permRedirect(['admin', 'author'], 'admin/dashboard');
 
         $id = $request->getParam('id');
 
@@ -433,6 +433,8 @@ class AdminController extends Controller
      */
     public function settings(Request $request)
     {
+        Permission::permRedirect(['admin', 'author'], 'admin/dashboard');
+
         $settings = new Settings();
 
         if($request->isPost()) {
@@ -442,30 +444,9 @@ class AdminController extends Controller
                 $settings->{$field} = $request->get($field);
             }
 
-            $upload = new File();
-
-            if(empty($settings->getErrors())) {
-                $logo = $_FILES['logo'];
-
-                $upload->set($logo)
-                    ->max_size(10)
-                    ->directory('img/settings');
-
-                if(!$settings->isNew()) {
-                    $settings->delete();
-                }
-
-                if($settings->save()) {
-                    if($upload->upload()) {
-                        $img_logo = $upload->fc;
-                        $settings->logo = $img_logo;
-                        $settings->save();
-                    } else {
-                        $upload->report();
-                    }
-                    Session::msg("Settings Saved Successfully.", 'success');
-                    Response::redirect('admin/settings');
-                }
+            if($settings->save()) {
+                Session::msg('Saved!', 'success');
+                Response::redirect('admin/settings');
             }
         }
 
@@ -493,6 +474,56 @@ class AdminController extends Controller
         ];
 
         return View::make('admin/settings/email', $view);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function fieldsSettings(Request $request)
+    {
+        Permission::permRedirect(['admin'], 'admin/settings');
+
+        $settings = new Settings();
+
+        if($request->isPost()) {
+            Session::csrfCheck();
+            $settings->name = strtolower($request->get('name'));
+
+            if ($settings->save()) {
+                Session::msg("{$settings->name} added successfully.", 'success');
+                Response::redirect('admin/settings/fields');
+            }
+        }
+
+        $view = [
+            'errors' => $settings->getErrors(),
+            'settings' => Settings::find(),
+        ];
+
+        return View::make('admin/settings/fields', $view);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function delete_field(Request $request)
+    {
+        Permission::permRedirect(['admin'], 'admin/settings');
+
+        $id = $request->getParam('id');
+
+        $params = [
+            'conditions' => "id = :id",
+            'bind' => ['id' => $id]
+        ];
+
+        $settings = Settings::findFirst($params);
+
+        if($settings) {
+            Session::msg('Field Deleted...');
+            $settings->delete();
+            Response::redirect('admin/settings/fields');
+        }
     }
 
     /**

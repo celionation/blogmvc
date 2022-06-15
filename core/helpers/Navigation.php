@@ -41,8 +41,8 @@ class Navigation
         $linkClass = $isDropdownItem ? 'dropdown-item' : 'nav-link';
         $linkClass .= $active && $isDropdownItem ? " active" : "";
         $link =  '/' . $link;
-        $html = "<li class=\"nav-item\">";
-        $html .= "<a class=\"{$linkClass}{$class}\" href=\"{$link}\" ><i class=\"{$icon}\"></i><span>{$label}</span></a>";
+        $html = "<li class=\"nav-item\" data-bs-toggle=\"tooltip\" data-placement=\"right\" title=\"{$label}\">";
+        $html .= "<a class=\"{$linkClass}{$class}\" href=\"{$link}\" ><i class=\"{$icon}\"></i><span class=\"nav-link-text\">{$label}</span></a>";
         $html .= "</li>";
         return $html;
     }
