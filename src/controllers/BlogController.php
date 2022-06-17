@@ -3,6 +3,7 @@
 namespace src\controllers;
 
 use core\Controller;
+use core\helpers\CoreHelpers;
 use core\helpers\GenerateToken;
 use core\Request;
 use core\Response;
@@ -38,22 +39,38 @@ class BlogController extends Controller
     {
         $this->setLayout('page');
 
-        $params = [
-            'columns' => "articles.*, users.username, categories.name as category, regions.name as region",
-            'conditions' => "articles.status = :status",
-            'bind' => ['status' => 'public'],
-            'joins' => [
-                ['users', 'articles.user_id = users.user_id'],
-                ['categories', 'articles.category_id = categories.id', 'categories', 'LEFT'],
-                ['regions', 'articles.region_id = regions.id', 'regions', 'LEFT']
-            ],
-            'order' => 'articles.created_at DESC'
-        ];
-        $params = Articles::mergeWithPagination($params);
+//        $params = [
+//            'columns' => "articles.*, users.username, categories.name as category, regions.name as region",
+//            'conditions' => "articles.status = :status",
+//            'bind' => ['status' => 'public'],
+//            'joins' => [
+//                ['users', 'articles.user_id = users.user_id'],
+//                ['categories', 'articles.category_id = categories.id', 'categories', 'LEFT'],
+//                ['regions', 'articles.region_id = regions.id', 'regions', 'LEFT']
+//            ],
+//            'order' => 'articles.created_at DESC'
+//        ];
+//        $params = Articles::mergeWithPagination($params);
+//
+//        $view = [
+//            'total' => Articles::findTotal($params),
+//            'articles' => Articles::find($params),
+//        ];
+
+//        $this->paginateNews();
+        $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
+
+        $pageData = $this->paginateNews($currentPage);
+
+        if(isset($_GET['page']) && isset($_GET['ajax'])) {
+            $news = $this->paginateNews($_GET['page']);
+
+            echo json_encode($news);
+            exit();
+        }
 
         $view = [
-            'total' => Articles::findTotal($params),
-            'articles' => Articles::find($params),
+            'articles' => $pageData['news'],
         ];
 
         return View::make('blog/news', $view);
@@ -142,6 +159,37 @@ class BlogController extends Controller
         ];
 
         return view::make('blog/contact', $view);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function paginateNews($currentPage = 1, $recordsPerPage = 5)
+    {
+        $params = [
+            'columns' => "articles.*, users.username, categories.name as category, regions.name as region",
+            'conditions' => "articles.status = :status",
+            'bind' => ['status' => 'public'],
+            'joins' => [
+                ['users', 'articles.user_id = users.user_id'],
+                ['categories', 'articles.category_id = categories.id', 'categories', 'LEFT'],
+                ['regions', 'articles.region_id = regions.id', 'regions', 'LEFT']
+            ],
+            'limit' => $recordsPerPage,
+            'offset' => ($currentPage - 1) * $recordsPerPage,
+        ];
+
+        $total = Articles::findTotal();
+        $numberOfPages = ceil($total / $recordsPerPage);
+
+        $news = Articles::find($params);
+
+        return [
+            'news' => $news,
+            'prevPage' => $currentPage > 1 ? $currentPage - 1 : false,
+            'nextPage' => $currentPage + 1 <= $numberOfPages ? $currentPage + 1 : false,
+            'numberOfPages' => $numberOfPages,
+        ];
     }
 
 }

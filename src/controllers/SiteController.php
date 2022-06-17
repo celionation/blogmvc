@@ -36,7 +36,7 @@ class SiteController extends Controller
             'joins' => [
                 ['categories', 'articles.category_id = categories.id', 'categories', 'LEFT'],
             ],
-            'limit' => '1',
+            'limit' => '4',
         ];
 
         $politicsParams = [
@@ -46,13 +46,57 @@ class SiteController extends Controller
             'joins' => [
                 ['categories', 'articles.category_id = categories.id', 'categories', 'LEFT'],
             ],
+            'limit' => '4',
+        ];
+
+        $aroundParams = [
+            'columns' => "articles.article_id, articles.title, articles.img, categories.name as category",
+            'conditions' => "articles.status = :status AND categories.name = :category",
+            'bind' => ['status' => 'public', 'category' => 'Around CNblog'],
+            'joins' => [
+                ['categories', 'articles.category_id = categories.id', 'categories', 'LEFT'],
+            ],
+            'limit' => '4',
+        ];
+
+        $globalParams = [
+            'columns' => "articles.article_id, articles.title, articles.img, categories.name as category",
+            'conditions' => "articles.status = :status AND categories.name = :category",
+            'bind' => ['status' => 'public', 'category' => 'Global'],
+            'joins' => [
+                ['categories', 'articles.category_id = categories.id', 'categories', 'LEFT'],
+            ],
+            'limit' => '8',
+        ];
+
+        $techParams = [
+            'columns' => "articles.article_id, articles.title, articles.img, categories.name as category",
+            'conditions' => "articles.status = :status AND categories.name = :category",
+            'bind' => ['status' => 'public', 'category' => 'Tech'],
+            'joins' => [
+                ['categories', 'articles.category_id = categories.id', 'categories', 'LEFT'],
+            ],
+            'limit' => '1',
+        ];
+
+        $storyParams = [
+            'columns' => "articles.article_id, articles.title, articles.img, categories.name as category",
+            'conditions' => "articles.status = :status AND categories.name = :category",
+            'bind' => ['status' => 'public', 'category' => 'Story'],
+            'joins' => [
+                ['categories', 'articles.category_id = categories.id', 'categories', 'LEFT'],
+            ],
             'limit' => '1',
         ];
 
         $view = [
             'latestArticles' => Articles::find($latestParams),
-            'sportsArticle' => Articles::findFirst($sportsParams),
-            'politicsArticle' => Articles::findFirst($politicsParams),
+            'techArticle' => Articles::findFirst($techParams),
+            'storyArticle' => Articles::findFirst($storyParams),
+            'sportsArticle' => Articles::find($sportsParams),
+            'politicsArticle' => Articles::find($politicsParams),
+            'aroundArticle' => Articles::find($aroundParams),
+            'globalArticle' => Articles::find($globalParams),
         ];
 
         return View::make('blog/home', $view);

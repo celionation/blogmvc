@@ -1,6 +1,7 @@
 <?php
 
 use src\controllers\AdminController;
+use src\controllers\AdminExtrasController;
 use src\controllers\AuthController;
 use src\controllers\BlogController;
 use src\controllers\MailboxController;
@@ -38,6 +39,9 @@ $app->router->get('/logout', [AuthController::class, 'logout']);
 
 // Admin
 $app->router->get('/admin/dashboard', [AdminController::class, 'dashboard']);
+$app->router->get('/admin/extras/rss', [AdminExtrasController::class, 'rss']);
+$app->router->get('/admin/extras/headlines', [AdminExtrasController::class, 'headlines']);
+$app->router->post('/admin/extras/headlines', [AdminExtrasController::class, 'headlines']);
 
 //articles Actions
 $app->router->get('/admin/articles', [AdminController::class, 'articles']);
@@ -48,10 +52,12 @@ $app->router->get('/admin/delete_article/{id}', [AdminController::class, 'delete
 //category Actions
 $app->router->get('/admin/categories/{id}', [AdminController::class, 'categories']);
 $app->router->post('/admin/categories/{id}', [AdminController::class, 'categories']);
+$app->router->get('/admin/delete_category/{id}', [AdminController::class, 'deleteCategory']);
 
 //Region Actions
 $app->router->get('/admin/regions/{id}', [AdminController::class, 'regions']);
 $app->router->post('/admin/regions/{id}', [AdminController::class, 'regions']);
+$app->router->get('/admin/delete_region/{id}', [AdminController::class, 'deleteRegion']);
 
 //User Actions
 $app->router->get('/admin/users', [AdminController::class, 'users']);

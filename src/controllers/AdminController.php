@@ -197,6 +197,8 @@ class AdminController extends Controller
      */
     public function categories(Request $request)
     {
+        Permission::permRedirect(['admin'], 'admin/dashboard');
+
         $id = $request->getParam('id');
 
         if ($id == 'new') {
@@ -240,8 +242,29 @@ class AdminController extends Controller
     /**
      * @throws Exception
      */
+    public function deleteCategory(Request $request)
+    {
+        Permission::permRedirect(['admin'], 'admin/dashboard');
+
+        $id = $request->getParam('id');
+
+        $category = Categories::findById($id);
+        if (!$category) {
+            Session::msg("That category does not exist");
+            Response::redirect('admin/categories/new');
+        }
+        $category->delete();
+        Session::msg("Category Deleted.", 'success');
+        Response::redirect('admin/categories/new');
+    }
+
+    /**
+     * @throws Exception
+     */
     public function regions(Request $request)
     {
+        Permission::permRedirect(['admin'], 'admin/dashboard');
+
         $id = $request->getParam('id');
 
         if ($id == 'new') {
@@ -280,6 +303,25 @@ class AdminController extends Controller
         ];
 
         return View::make('admin/regions/regions', $view);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function deleteRegion(Request $request)
+    {
+        Permission::permRedirect(['admin'], 'admin/dashboard');
+
+        $id = $request->getParam('id');
+
+        $region = Regions::findById($id);
+        if (!$region) {
+            Session::msg("That region does not exist");
+            Response::redirect('admin/regions/new');
+        }
+        $region->delete();
+        Session::msg("Region Deleted.", 'success');
+        Response::redirect('admin/regions/new');
     }
 
     /**

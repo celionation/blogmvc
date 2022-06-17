@@ -58,7 +58,7 @@ $this->title = 'Regions Page';
                                             <tr>
                                                 <td><?= $region->name ?></td>
                                                 <td>
-                                                    <a href="/admin/regions/destory/<?= $region->id ?>" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash-alt"></i></a>
+                                                    <a href="/admin/delete_region/<?= $region->id ?>" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash-alt"></i></a>
                                                     <a href="/admin/regions/<?= $region->id ?>" class="btn btn-sm btn-outline-warning"><i class="fas fa-edit"></i></a>
                                                 </td>
                                             </tr>

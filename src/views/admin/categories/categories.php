@@ -58,7 +58,7 @@ $this->title = 'Categories Page';
                                             <tr>
                                                 <td><?= $category->name ?></td>
                                                 <td>
-                                                    <a href="/admin/category/destory/<?= $category->id ?>" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash-alt"></i></a>
+                                                    <a href="/admin/delete_category/<?= $category->id ?>" class="btn btn-sm btn-outline-danger"><i class="fas fa-trash-alt"></i></a>
                                                     <a href="/admin/categories/<?= $category->id ?>" class="btn btn-sm btn-outline-warning"><i class="fas fa-edit"></i></a>
                                                 </td>
                                             </tr>

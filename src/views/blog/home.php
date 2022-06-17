@@ -24,19 +24,19 @@ $this->title = 'Welcome Page';
         <div class="slider-box">
             <div class="slider-track">
                 <div class="slide">
-                    <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt temporibus quia repellat sit mol
+                    <h2><i class="fas fa-angle-double-right"></i> Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt temporibus quia repellat sit mol
                     </h2>
                 </div>
                 <div class="slide">
-                    <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt temporibus quia repellat sit mol
+                    <h2><i class="fas fa-angle-double-right"></i> Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt temporibus quia repellat sit mol
                     </h2>
                 </div>
                 <div class="slide">
-                    <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt temporibus quia repellat sit mol
+                    <h2><i class="fas fa-angle-double-right"></i> Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt temporibus quia repellat sit mol
                     </h2>
                 </div>
                 <div class="slide">
-                    <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt temporibus quia repellat sit mol
+                    <h2><i class="fas fa-angle-double-right"></i> Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt temporibus quia repellat sit mol
                     </h2>
                 </div>
             </div>
@@ -47,7 +47,7 @@ $this->title = 'Welcome Page';
     <!-- __________________SECOND SECTION___________________ -->
     <section class="section border-bottom border-3 border-danger">
         <div class="col-12 col-md-12 col-sm-12">
-            <h2 class="text-uppercase ms-5 mb-4 mt-2 border-bottom border-3 border-danger text-start fw-bold"><i class="fas fa-arrow-circle-right text-danger"></i> LATEST STORIES</h2>
+            <h2 class="text-uppercase ms-5 mb-4 mt-2 border-bottom border-3 border-danger text-start fw-bold"><i class="fas fa-arrow-circle-right text-danger"></i> News</h2>
             <div class="row">
                 <?php foreach ($latestArticles as $latestArticle): ?>
                 <div class="col-lg-4 col-md-6 col-sm-12 col-12 mb-2">
@@ -58,7 +58,7 @@ $this->title = 'Welcome Page';
                         <div class="card-header position-absolute bottom-0 pt-4">
                             <a href="/read/<?= $latestArticle->article_id ?>" class="text-dark">
                                 <h2 class="text-shadow h6 text-capitalize border-bottom border-3 border-danger pb-2 text-white text-start">
-                                    <?= $latestArticle->title ?>></h2>
+                                    <?= $latestArticle->title ?></h2>
                             </a>
                         </div>
                     </div>
@@ -72,34 +72,34 @@ $this->title = 'Welcome Page';
     <!-- ________________________THIRD SECTION___________________ -->
     <section class="section border-bottom border-top border-3 border-danger">
         <div class="row mb-3">
-            <?php if($sportsArticle !== false): ?>
+            <?php if($techArticle !== false): ?>
             <div class="col-12 col-md-6 col-sm-12">
-                <h2 class="text-uppercase ms-5 mb-4 mt-2 border-bottom border-3 border-danger text-start fw-bold"><i class="fas fa-arrow-circle-right text-danger"></i> Sports</h2>
+                <h2 class="text-uppercase ms-5 mb-4 mt-2 border-bottom border-3 border-danger text-start fw-bold"><i class="fas fa-arrow-circle-right text-danger"></i> Tech</h2>
                 <div class="card position-relative overflow-hidden">
-                    <div class="thumbnail">
-                        <img src="<?= $sportsArticle->img ?>" alt="" class="w-100 img-fluid">
+                    <div class="mini-img">
+                        <img src="<?= $techArticle->img ?>" alt="" class="w-100 img-fluid">
                     </div>
                     <div class="card-header position-absolute bottom-0 pt-4">
-                        <a href="/read/<?= $sportsArticle->article_id ?>" class="text-dark">
+                        <a href="/read/<?= $techArticle->article_id ?>" class="text-dark">
                             <h2 class="text-shadow h1 text-capitalize border-bottom border-3 border-danger pb-2 text-white text-start">
-                                <?= $sportsArticle->title ?></h2>
+                                <?= $techArticle->title ?></h2>
                         </a>
                     </div>
                 </div>
             </div>
             <?php endif; ?>
 
-            <?php if($politicsArticle !== false): ?>
+            <?php if($storyArticle !== false): ?>
             <div class="col-12 col-md-6 col-sm-12">
-                <h2 class="text-uppercase ms-5 mb-4 mt-2 border-bottom border-3 border-danger text-start fw-bold"> <i class="fas fa-arrow-circle-right text-danger"></i> Politics</h2>
+                <h2 class="text-uppercase ms-5 mb-4 mt-2 border-bottom border-3 border-danger text-start fw-bold"> <i class="fas fa-arrow-circle-right text-danger"></i> Story</h2>
                 <div class="card position-relative overflow-hidden">
-                    <div class="thumbnail">
-                        <img src="<?= $politicsArticle->img ?>" alt="" class="w-100 img-fluid">
+                    <div class="mini-img">
+                        <img src="<?= $storyArticle->img ?>" alt="" class="w-100 img-fluid">
                     </div>
                     <div class="card-header position-absolute bottom-0 pt-4">
-                        <a href="/read/<?= $politicsArticle->article_id ?>" class="text-dark">
+                        <a href="/read/<?= $storyArticle->article_id ?>" class="text-dark">
                             <h2 class="text-shadow h1 text-capitalize border-bottom border-3 border-danger pb-2 text-white text-start">
-                                <?= $politicsArticle->title ?></h2>
+                                <?= $storyArticle->title ?></h2>
                         </a>
                     </div>
                 </div>
@@ -109,103 +109,119 @@ $this->title = 'Welcome Page';
     </section>
     <!-- ________________________END OF THIRD SECTION___________________ -->
 
-    <!-- ___________________________FOURTH SECTION___________________ -->
+    <!-- ___________________________SPORT SECTION___________________ -->
+    <?php if($sportsArticle): ?>
     <section class="section">
         <div class="row mb-3">
             <div class="col-12">
-                <h2 class="text-uppercase ms-5 mb-4 mt-2 border-bottom border-3 border-danger text-start fw-bold"><i class="fas fa-arrow-circle-right text-danger"></i> Updates</h2>
+                <h2 class="text-uppercase ms-5 mb-4 mt-2 border-bottom border-3 border-danger text-start fw-bold"><i class="fas fa-arrow-circle-right text-danger"></i> SPORTS</h2>
                 <div class="row">
-                    <div class="col-12 col-lg-3 col-md-4 col-sm-6 mb-2">
+                    <?php foreach ($sportsArticle as $spa): ?>
+                        <div class="col-12 col-lg-3 col-md-4 col-sm-6 mb-2">
                         <div class="card position-relative overflow-hidden">
-                            <img src="/assets/img/trending/trending_2.jpg" alt="" class="w-100 img-fluid">
+                            <div class="mini-img">
+                                <img src="<?= $spa->img ?>" alt="" class="w-100 img-fluid">
+                            </div>
                             <div class="card-header position-absolute bottom-0 pt-4">
-                                <a href="#" class="text-dark">
+                                <a href="/read/<?= $spa->article_id ?>" class="text-dark">
                                     <h2 class="text-shadow h6 text-capitalize border-bottom border-3 border-danger pb-2 text-white text-start">
-                                        Twitter's New Retweet With Comment Counter Is Now Available On Andriod & Web</h2>
+                                        <?= $spa->title ?></h2>
                                 </a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-lg-3 col-md-4 col-sm-6 mb-2">
-                        <div class="card position-relative overflow-hidden">
-                            <img src="/assets/img/trending/trending_2.jpg" alt="" class="w-100 img-fluid">
-                            <div class="card-header position-absolute bottom-0 pt-4">
-                                <a href="#" class="text-dark">
-                                    <h2 class="text-shadow h6 text-capitalize border-bottom border-3 border-danger pb-2 text-white text-start">
-                                        Twitter's New Retweet With Comment Counter Is Now Available On Andriod & Web</h2>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-3 col-md-4 col-sm-6 mb-2">
-                        <div class="card position-relative overflow-hidden">
-                            <img src="/assets/img/trending/trending_2.jpg" alt="" class="w-100 img-fluid">
-                            <div class="card-header position-absolute bottom-0 pt-4">
-                                <a href="#" class="text-dark">
-                                    <h2 class="text-shadow h6 text-capitalize border-bottom border-3 border-danger pb-2 text-white text-start">
-                                        Twitter's New Retweet With Comment Counter Is Now Available On Andriod & Web</h2>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-3 col-md-4 col-sm-6 mb-2">
-                        <div class="card position-relative overflow-hidden">
-                            <img src="/assets/img/trending/trending_2.jpg" alt="" class="w-100 img-fluid">
-                            <div class="card-header position-absolute bottom-0 pt-4">
-                                <a href="#" class="text-dark">
-                                    <h2 class="text-shadow h6 text-capitalize border-bottom border-3 border-danger pb-2 text-white text-start">
-                                        Twitter's New Retweet With Comment Counter Is Now Available On Andriod & Web</h2>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-3 col-md-4 col-sm-6 mb-2">
-                        <div class="card position-relative overflow-hidden">
-                            <img src="/assets/img/trending/trending_2.jpg" alt="" class="w-100 img-fluid">
-                            <div class="card-header position-absolute bottom-0 pt-4">
-                                <a href="#" class="text-dark">
-                                    <h2 class="text-shadow h6 text-capitalize border-bottom border-3 border-danger pb-2 text-white text-start">
-                                        Twitter's New Retweet With Comment Counter Is Now Available On Andriod & Web</h2>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-3 col-md-4 col-sm-6 mb-2">
-                        <div class="card position-relative overflow-hidden">
-                            <img src="/assets/img/trending/trending_2.jpg" alt="" class="w-100 img-fluid">
-                            <div class="card-header position-absolute bottom-0 pt-4">
-                                <a href="#" class="text-dark">
-                                    <h2 class="text-shadow h6 text-capitalize border-bottom border-3 border-danger pb-2 text-white text-start">
-                                        Twitter's New Retweet With Comment Counter Is Now Available On Andriod & Web</h2>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-3 col-md-4 col-sm-6 mb-2">
-                        <div class="card position-relative overflow-hidden">
-                            <img src="/assets/img/trending/trending_2.jpg" alt="" class="w-100 img-fluid">
-                            <div class="card-header position-absolute bottom-0 pt-4">
-                                <a href="#" class="text-dark">
-                                    <h2 class="text-shadow h6 text-capitalize border-bottom border-3 border-danger pb-2 text-white text-start">
-                                        Twitter's New Retweet With Comment Counter Is Now Available On Andriod & Web</h2>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-3 col-md-4 col-sm-6 mb-2">
-                        <div class="card position-relative overflow-hidden">
-                            <img src="/assets/img/trending/trending_1.jpg" alt="" class="w-100 img-fluid">
-                            <div class="card-header position-absolute bottom-0 pt-4">
-                                <a href="#" class="text-dark">
-                                    <h2 class="text-shadow h6 text-capitalize border-bottom border-3 border-danger pb-2 text-white text-start">
-                                        Twitter's New Retweet With Comment Counter Is Now Available On Andriod & Web</h2>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>
     </section>
-    <!-- ___________________________END OF FOURTH SECTION___________________ -->
+    <?php endif; ?>
+    <!-- ___________________________END OF SPORT SECTION___________________ -->
+
+    <!-- ___________________________POLITICS SECTION___________________ -->
+    <?php if($politicsArticle): ?>
+    <section class="section">
+        <div class="row mb-3">
+            <div class="col-12">
+                <h2 class="text-uppercase ms-5 mb-4 mt-2 border-bottom border-3 border-danger text-start fw-bold"><i class="fas fa-arrow-circle-right text-danger"></i> POLITICS</h2>
+                <div class="row">
+                    <?php foreach ($politicsArticle as $ppa): ?>
+                        <div class="col-12 col-lg-3 col-md-4 col-sm-6 mb-2">
+                            <div class="card position-relative overflow-hidden">
+                                <div class="mini-img">
+                                    <img src="<?= $ppa->img ?>" alt="" class="w-100 img-fluid">
+                                </div>
+                                <div class="card-header position-absolute bottom-0 pt-4">
+                                    <a href="/read/<?= $ppa->article_id ?>" class="text-dark">
+                                        <h2 class="text-shadow h6 text-capitalize border-bottom border-3 border-danger pb-2 text-white text-start">
+                                            <?= $ppa->title ?></h2>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </section>
+    <?php endif; ?>
+    <!-- ___________________________END OF POLITICS SECTION___________________ -->
+
+    <!-- ___________________________Around CNB SECTION___________________ -->
+    <?php if($aroundArticle): ?>
+    <section class="section">
+        <div class="row mb-3">
+            <div class="col-12">
+                <h2 class="text-uppercase ms-5 mb-4 mt-2 border-bottom border-3 border-danger text-start fw-bold"><i class="fas fa-arrow-circle-right text-danger"></i> Around CNB</h2>
+                <div class="row">
+                    <?php foreach ($aroundArticle as $aa): ?>
+                    <div class="col-12 col-lg-3 col-md-4 col-sm-6 mb-2">
+                        <div class="card position-relative overflow-hidden">
+                            <div class="mini-img">
+                                <img src="<?= $aa->img ?>" alt="" class="w-100 img-fluid">
+                            </div>
+                            <div class="card-header position-absolute bottom-0 pt-4">
+                                <a href="/read/<?= $aa->article_id ?>" class="text-dark">
+                                    <h2 class="text-shadow h6 text-capitalize border-bottom border-3 border-danger pb-2 text-white text-start">
+                                        <?= $aa->title ?></h2>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </section>
+    <?php endif; ?>
+    <!-- ___________________________END OF Around CNB SECTION___________________ -->
+
+    <!-- ___________________________Global SECTION___________________ -->
+    <?php if($globalArticle): ?>
+    <section class="section">
+        <div class="row mb-3">
+            <div class="col-12">
+                <h2 class="text-uppercase ms-5 mb-4 mt-2 border-bottom border-3 border-danger text-start fw-bold"><i class="fas fa-arrow-circle-right text-danger"></i> Global</h2>
+                <div class="row">
+                    <?php foreach ($globalArticle as $glo): ?>
+                    <div class="col-12 col-lg-3 col-md-4 col-sm-6 mb-2">
+                        <div class="card position-relative overflow-hidden">
+                            <div class="mini-img">
+                                <img src="<?= $glo->img ?>" alt="" class="w-100 img-fluid">
+                            </div>
+                            <div class="card-header position-absolute bottom-0 pt-4">
+                                <a href="/read/<?= $glo->article_id ?>" class="text-dark">
+                                    <h2 class="text-shadow h6 text-capitalize border-bottom border-3 border-danger pb-2 text-white text-start">
+                                        <?= $glo->title ?></h2>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </section>
+    <?php endif; ?>
+    <!-- ___________________________END OF Global SECTION___________________ -->
 </main>

@@ -26,16 +26,6 @@ use core\Session;
     <!-- Custom styles -->
     <link rel="stylesheet" href="<?= asset('/assets/css/admin/sb-admin.css') ?>">
     <title>Blog MVC ADMIN DASHBOARD | <?= $this->title ?></title>
-    <script src="<?= asset('/assets/vendor/ckeditor5/ckeditor.js') ?>"></script>
-    <script>
-        window.addEventListener('load', function() {
-            ClassicEditor
-                .create(document.querySelector('#body'))
-                .catch(error => {
-                    console.error(error);
-                });
-        });
-    </script>
 
     <style>
         ::selection{
@@ -85,7 +75,6 @@ use core\Session;
 <script type="application/javascript" src="<?= asset('/assets/vendor/datatables/dataTables.bootstrap4.js') ?>"></script>
 <script type="application/javascript" src="<?= asset('/assets/js/admin/sb-admin.min.js') ?>"></script>
 <script type="application/javascript" src="<?= asset('/assets/js/admin/sb-admin-datatables.min.js') ?>"></script>
-<script type="application/javascript" src="<?= asset('/assets/js/admin/sb-admin-charts.min.js') ?>"></script>
 <script type="application/javascript" src="<?= asset('/assets/js/all.js') ?>"></script>
 </body>
 </html>

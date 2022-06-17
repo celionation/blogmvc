@@ -9,6 +9,17 @@ $this->title = 'Article Page';
 
 ?>
 
+<script src="<?= asset('/assets/vendor/ckeditor5/ckeditor.js') ?>"></script>
+<script>
+    window.addEventListener('load', function() {
+        ClassicEditor
+            .create(document.querySelector('#body'))
+            .catch(error => {
+                console.error(error);
+            });
+    });
+</script>
+
 <h2><?= $heading ?></h2>
 
 <div class="poster mb-2">
