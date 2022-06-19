@@ -28,6 +28,7 @@ class n0003_create_article
             `status` ENUM('Public','Private') NULL DEFAULT 'Private' ,
             `category_id` INT NULL ,
             `region_id` INT NULL ,
+            copyright VARCHAR(100) NULL ,
             PRIMARY KEY (`id`),
             UNIQUE `article_id` (`article_id`),
             INDEX `user_id` (`user_id`),

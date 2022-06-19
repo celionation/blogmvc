@@ -40,8 +40,12 @@ $app->router->get('/logout', [AuthController::class, 'logout']);
 // Admin
 $app->router->get('/admin/dashboard', [AdminController::class, 'dashboard']);
 $app->router->get('/admin/extras/rss', [AdminExtrasController::class, 'rss']);
+
+//Headlines
 $app->router->get('/admin/extras/headlines', [AdminExtrasController::class, 'headlines']);
 $app->router->post('/admin/extras/headlines', [AdminExtrasController::class, 'headlines']);
+$app->router->get('/admin/extras/headlines/status/{id}', [AdminExtrasController::class, 'statusHeadline']);
+$app->router->get('/admin/extras/headlines/delete/{id}', [AdminExtrasController::class, 'deleteHeadline']);
 
 //articles Actions
 $app->router->get('/admin/articles', [AdminController::class, 'articles']);

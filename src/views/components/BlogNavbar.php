@@ -20,7 +20,6 @@ use core\helpers\Navigation;
             <ul class="navbar-nav mx-auto mb-2 mb-md-0">
                 <?= Navigation::navItem('', 'Home') ?>
                 <?= Navigation::navItem('news', 'News') ?>
-                <?= Navigation::navItem('sports', 'Sports') ?>
                 <?= Navigation::navItem('contact', 'Contact') ?>
                 <?= Navigation::navItem('magazine', 'Magazine') ?>
             </ul>

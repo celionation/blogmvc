@@ -34,6 +34,10 @@ global $currentUser;
                     <div class="single-content">
                         <div class="text-shadow fs-5 fst-italic lh-lg pb-2 border-bottom border-danger border-3">
                             <p><?= html_entity_decode($article->body) ?></p>
+                            <div class="copyright bg-danger px-2 float-end">
+                                <h6 class="text-white"><span>Source:</span> CNBlog</h6>
+                            </div>
+                            <div class="clearfix"></div>
                         </div>
                     </div>
                     <!-- Comment Section -->

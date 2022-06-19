@@ -19,7 +19,6 @@ use core\Config;
     <link rel="stylesheet" href="<?= asset('/assets/css/all.css') ?>">
     <!-- Swiper.js styles -->
     <link rel="stylesheet" href="<?= asset('/assets/css/bootstrap.min.css') ?>">
-    <link rel="stylesheet" href="<?= asset('/assets/vendor/sweetalert2/sweetalert2.min.css') ?>">
     <!-- Custom styles -->
     <link rel="stylesheet" href="<?= asset('/assets/css/style.css') ?>">
     <title>Laraton Blog MVC | <?= $this->title ?></title>
@@ -39,9 +38,7 @@ use core\Config;
 </main>
 <?= component('BlogFooter') ?>
 
-<script type="application/javascript" src="<?= asset('/assets/vendor/jquery/jquery.min.js') ?>"></script>
 <script type="application/javascript" src="<?= asset('/assets/js/bootstrap.bundle.min.js') ?>"></script>
-<script type="application/javascript" src="<?= asset('/assets/vendor/sweetalert2/sweetalert2.all.min.js') ?>"></script>
 <script type="application/javascript" src="/assets/js/main.js?v=<?= Config::get("version") ?>"></script>
 <script type="application/javascript" src="<?= asset('/assets/js/all.js') ?>"></script>
 </body>

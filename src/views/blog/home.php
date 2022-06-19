@@ -3,6 +3,13 @@
 
 $this->title = 'Welcome Page';
 
+$latestArticles = $this->latestArticles;
+$techArticle = $this->techArticle;
+$storyArticle = $this->storyArticle;
+$sportsArticle = $this->sportsArticle;
+$politicsArticle = $this->politicsArticle;
+$aroundArticle = $this->aroundArticle;
+$globalArticle = $this->globalArticle;
 
 ?>
 
@@ -20,26 +27,25 @@ $this->title = 'Welcome Page';
     <!-- ________________END OF LABEL_____________________ -->
 
     <!--_______________________SLIDER____________________ -->
-    <section class="slider px-2 border-bottom border-top border-3 border-danger">
-        <div class="slider-box">
-            <div class="slider-track">
-                <div class="slide">
-                    <h2><i class="fas fa-angle-double-right"></i> Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt temporibus quia repellat sit mol
-                    </h2>
-                </div>
-                <div class="slide">
-                    <h2><i class="fas fa-angle-double-right"></i> Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt temporibus quia repellat sit mol
-                    </h2>
-                </div>
-                <div class="slide">
-                    <h2><i class="fas fa-angle-double-right"></i> Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt temporibus quia repellat sit mol
-                    </h2>
-                </div>
-                <div class="slide">
-                    <h2><i class="fas fa-angle-double-right"></i> Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt temporibus quia repellat sit mol
-                    </h2>
-                </div>
+    <section class="mb-3 border-bottom border-top border-3 border-danger">
+        <div class="news_container">
+            <div class="title">
+                Breaking News
             </div>
+
+            <ul>
+                <?php foreach ($headlines as $headline): ?>
+                <li>
+                    <?= html_entity_decode($headline->body) ?>
+                </li>
+<!--                <li>-->
+<!--                    Lorem ipsum dolor sit amet-->
+<!--                </li>-->
+<!--                <li>-->
+<!--                    Lorem ipsum dolor sit amet consecrate radicalising elite. Explicable.-->
+<!--                </li>-->
+                <?php endforeach; ?>
+            </ul>
         </div>
     </section>
     <!--___________________END OF SLIDER________________________ -->

@@ -27,6 +27,7 @@ $this->title = 'Admin Headlines';
             <form action="" method="post">
                 <?= Form::csrfField() ?>
                 <?= Form::textareaField('', 'body', '', ['class' => 'form-control', 'rows' => "8"], ['class' => 'mb-3'], $errors) ?>
+                <button type="submit" class="btn btn-outline-info w-100">Add</button>
             </form>
         </div>
     </div>
@@ -37,21 +38,40 @@ $this->title = 'Admin Headlines';
                 <thead>
                 <tr>
                     <th>#Headlines</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
+                <?php foreach ($headlinesList as $headline): ?>
                 <tr>
-                    <td>Cheesecake candy canes danish gummies cheesecake ice cream. Tootsie roll icing caramels jelly beans shortbread cake gingerbread tiramisu.</td>
+                    <td><?= html_entity_decode($headline->body) ?></td>
+                    <td><?= $headline->status ? 'Active' : 'Closed' ?></td>
                     <td>
-                        <a href="#" class="btn btn-info"><i class="fas fa-ban"></i></a>
-                        <a href="#" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                        <button class="btn btn-info my-1" onclick="statusHeadline('<?= $headline->id ?>')"><i class="fas fa-ban"></i></button>
+                        <button class="btn btn-danger my-1" onclick="deleteHeadline('<?= $headline->id ?>')"><i class="fas fa-trash-alt"></i></button>
                     </td>
                 </tr>
+                <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+
+
+<script>
+    function deleteHeadline(id) {
+        if (window.confirm("Are you sure you want to delete this headline? This cannot be undone!")) {
+            window.location.href = `/admin/extras/headlines/delete/${id}`;
+        }
+    }
+
+    function statusHeadline(id) {
+        if (window.confirm("Are you sure you want to change status of this headline?")) {
+            window.location.href = `/admin/extras/headlines/status/${id}`;
+        }
+    }
+</script>
 
 

@@ -4,9 +4,13 @@ namespace src\controllers;
 
 use core\Controller;
 use core\helpers\CoreHelpers;
+use core\Request;
+use core\Response;
+use core\Session;
 use core\View;
 use Exception;
 use src\classes\Permission;
+use src\models\Headlines;
 use src\models\Users;
 
 class AdminExtrasController extends Controller
@@ -34,17 +38,91 @@ class AdminExtrasController extends Controller
     {
         $view = [
             'errors' => [],
+            'country' => [
+                '' => 'Select Country',
+                'NG' => 'Nigeria',
+                'US' => 'USA',
+                'GB' => 'UK'
+            ],
+            'category' => [
+                '' => 'Select Category',
+                'tech' => 'Tech',
+                'business' => 'Business',
+                'sports' => 'Sports'
+            ],
         ];
 
         return View::make('admin/extras/rss', $view);
     }
 
-    public function headlines()
+    /**
+     * @throws Exception
+     */
+    public function headlines(Request $request)
     {
+        Permission::permRedirect(['admin', 'author'], 'admin/dashboard');
+
+        $headlines = new Headlines();
+
+        if($request->isPost()) {
+            Session::csrfCheck();
+
+            $headlines->status = '1';
+            $headlines->body = $request->get('body');
+
+            if($headlines->save()) {
+                Session::msg("Headline Saved Successfully!.", 'success');
+                Response::redirect('admin/extras/headlines');
+            }
+        }
+
+        $headlinesList = $headlines::find();
+
         $view = [
-            'errors' => [],
+            'errors' => $headlines->getErrors(),
+            'headlinesList' => $headlinesList,
         ];
 
         return View::make('admin/extras/headlines', $view);
     }
+
+    /**
+     * @throws Exception
+     */
+    public function statusHeadline(Request $request)
+    {
+        Permission::permRedirect(['admin', 'author'], 'admin/dashboard');
+
+        $id = $request->getParam('id');
+
+        $headline = Headlines::findById($id);
+
+        if($headline) {
+            $headline->status = $headline->status ? 0 : 1;
+            $headline->save();
+            $msg = $headline->status ? "Headline Active." : "Headline Closed.";
+        }
+        Session::msg($msg, 'success');
+        Response::redirect('admin/extras/headlines');
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function deleteHeadline(Request $request)
+    {
+        Permission::permRedirect(['admin', 'author'], 'admin/dashboard');
+
+        $id = $request->getParam('id');
+
+        $headline = Headlines::findById($id);
+
+        if($headline) {
+            $headline->delete();
+        }
+        Session::msg('Headline Deleted Successfully.', 'danger');
+        Response::redirect('admin/extras/headlines');
+    }
+
+
 }

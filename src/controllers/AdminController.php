@@ -3,6 +3,7 @@
 namespace src\controllers;
 
 use core\Application;
+use core\Config;
 use core\Controller;
 use core\helpers\CoreHelpers;
 use core\helpers\File;
@@ -125,6 +126,7 @@ class AdminController extends Controller
             $article->status = $request->get('status');
             $article->category_id = $request->get('category_id');
             $article->region_id = $request->get('region_id');
+            $article->copyright = Config::get('SITENAME');
             $upload = new FileUpload('img');
 
             if ($id != 'new') {
@@ -184,7 +186,7 @@ class AdminController extends Controller
         $article = Articles::findFirst($params);
         if ($article) {
             Session::msg("Article Deleted Successfully.", 'success');
-            unlink(Application::$ROOT_DIR . '/public/' . $article->img);
+            unlink(Application::$ROOT_DIR . $article->img);
             $article->delete();
         } else {
             Session::msg("You do not have permission to delete that article");

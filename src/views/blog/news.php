@@ -50,66 +50,27 @@ $total = $this->total;
         <!-- End of News -->
 
         <!-- Pagination -->
-        <div class="pagination-links">
-            <button class="text-center btn btn-outline-primary w-100 my-3 rounded-pill load-more-btn">Load more</button>
+        <div class="my-3">
+            <nav aria-label="Pagination">
+                <ul class="d-flex justify-content-center align-items-center my-3 pagination">
+                    <li class="page-item <?= !$prevPage ? 'disabled' : '' ?>" aria-current="page">
+                        <a class="page-link" href="/news?page=<?= $prevPage ?>">&laquo;</a>
+                    </li>
+                    <?php foreach ($pageNumbers as $page): ?>
+                        <?php if($page == $currentPage || $page == '...'): ?>
+                            <li class="page-item disabled"><a class="page-link" href="#"><?= $page ?></a></li>
+                        <?php else: ?>
+                            <li class="page-item active" aria-current="page">
+                                <a class="page-link" href="/news?page=<?= $page ?>"><?= $page ?></a>
+                            </li>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                    <li class="page-item <?= !$nextPage ? 'disabled' : '' ?>" aria-current="page">
+                        <a class="page-link" href="/news?page=<?= $nextPage ?>">&raquo;</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
         <!-- //Pagination -->
     </div>
 </div>
-
-<script>
-    const loadMoreBtn = document.querySelector('.load-more-btn')
-    const articles = document.querySelector('.articles')
-    const paginationLinks = document.querySelector('.pagination-links')
-
-    function displayPosts(posts)
-    {
-        posts.forEach(post => {
-            let postHtmlString = `
-                <div class="card">
-                            <div class="thumbnail">
-                                <img src="${post.img}" alt="" class="w-100">
-                            </div>
-                            <div class="card-header">
-                                <a href="#" class="text-dark">
-                                    <h2 class="text-shadow h2 text-capitalize border-bottom border-3 border-danger pb-2">
-                                        ${post.title}
-                                    </h2>
-                                </a>
-                                <div class="info border-bottom border-3 border-danger pb-2 d-flex justify-content-around align-items-center">
-                                    <a class="text-dark small"><i class="far fa-clock"></i> ${post.created_at}</a> &bull;
-                                    <span class="text-dark small"><i class="fas fa-map-marker-alt"></i> ${post.region}</span> &bull;
-                                    <a class="text-dark small"><span class="fas fa-tag"></span>
-                                        <span class="badge bg-primary py-2">${post.category}</span>
-                                    </a>
-                                </div>
-                                <div class="text-shadow fst-italic">
-                                    <p>${post.body}</p>
-                                </div>
-                                <a href="/read/${post.article_id}" class="btn btn-primary btn-sm">Read More</a>
-                            </div>
-                        </div>
-            `;
-
-            const domParser = new DOMParser()
-            const doc = domParser.parseFromString(postHtmlString, 'text/html')
-            const postNode = doc.body.firstChild
-            articles.appendChild(postNode)
-        })
-    }
-
-    let nextPage = 2
-
-    loadMoreBtn.addEventListener('click', async function () {
-        loadMoreBtn.textContent = 'Loading...'
-        const response = await fetch(`/news?page=${nextPage}&ajax=1`)
-        const data = await response.json()
-        displayPosts(data.news)
-        nextPage = data.nextpage
-        if(!data.nextpage) {
-            paginationLinks.innerHTML = '<div class="text-muted">No more Post</div>'
-        } else {
-            loadMoreBtn.textContent = 'Load More'
-        }
-    })
-</script>

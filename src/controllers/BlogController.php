@@ -39,38 +39,17 @@ class BlogController extends Controller
     {
         $this->setLayout('page');
 
-//        $params = [
-//            'columns' => "articles.*, users.username, categories.name as category, regions.name as region",
-//            'conditions' => "articles.status = :status",
-//            'bind' => ['status' => 'public'],
-//            'joins' => [
-//                ['users', 'articles.user_id = users.user_id'],
-//                ['categories', 'articles.category_id = categories.id', 'categories', 'LEFT'],
-//                ['regions', 'articles.region_id = regions.id', 'regions', 'LEFT']
-//            ],
-//            'order' => 'articles.created_at DESC'
-//        ];
-//        $params = Articles::mergeWithPagination($params);
-//
-//        $view = [
-//            'total' => Articles::findTotal($params),
-//            'articles' => Articles::find($params),
-//        ];
-
-//        $this->paginateNews();
         $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
 
         $pageData = $this->paginateNews($currentPage);
-
-        if(isset($_GET['page']) && isset($_GET['ajax'])) {
-            $news = $this->paginateNews($_GET['page']);
-
-            echo json_encode($news);
-            exit();
-        }
+        $pageNumbers = $this->getPaginationNumbers($currentPage, $pageData['numberOfPages']);
 
         $view = [
             'articles' => $pageData['news'],
+            'pageNumbers' => $pageNumbers,
+            'currentPage' => $currentPage,
+            'prevPage' => $pageData['prevPage'],
+            'nextPage' => $pageData['nextPage'],
         ];
 
         return View::make('blog/news', $view);
@@ -164,7 +143,7 @@ class BlogController extends Controller
     /**
      * @throws Exception
      */
-    public function paginateNews($currentPage = 1, $recordsPerPage = 5)
+    public function paginateNews($currentPage = 1, $recordsPerPage = 10)
     {
         $params = [
             'columns' => "articles.*, users.username, categories.name as category, regions.name as region",
@@ -177,6 +156,7 @@ class BlogController extends Controller
             ],
             'limit' => $recordsPerPage,
             'offset' => ($currentPage - 1) * $recordsPerPage,
+            'order' => 'articles.created_at DESC'
         ];
 
         $total = Articles::findTotal();
@@ -190,6 +170,46 @@ class BlogController extends Controller
             'nextPage' => $currentPage + 1 <= $numberOfPages ? $currentPage + 1 : false,
             'numberOfPages' => $numberOfPages,
         ];
+    }
+
+    public function getPaginationNumbers($currentPage, $totalNumberOfPages)
+    {
+        $current = $currentPage;
+        $last = $totalNumberOfPages;
+        $delta = 2;
+        $left = $current - $delta;
+        $right = $current + $delta + 1;
+
+        $range = [];
+        $rangeWithDots = [];
+        $i = -1;
+
+        for($i = 1; $i <= $last; $i++)
+        {
+            if($i == 1 || $i == $last || $i >= $left && $i < $right)
+            {
+                array_push($range, $i);
+            }
+        }
+
+        for($i = 0; $i < count($range); $i++)
+        {
+            if($i != -1)
+            {
+                if($range[$i] - $i === 2)
+                {
+                    array_push($rangeWithDots, $i + 1);
+
+                } else if($range[$i] - $i !== 1){
+
+                    array_push($rangeWithDots, '...');
+                }
+            }
+
+            array_push($rangeWithDots, $range[$i]);
+            $i = $range[$i];
+        }
+        return $rangeWithDots;
     }
 
 }

@@ -7,6 +7,7 @@ use core\helpers\CoreHelpers;
 use core\View;
 use Exception;
 use src\models\Articles;
+use src\models\Headlines;
 use src\models\Users;
 
 class SiteController extends Controller
@@ -89,6 +90,12 @@ class SiteController extends Controller
             'limit' => '1',
         ];
 
+        $headlinesParams = [
+            'conditions' => "status = :status",
+            'bind' => ['status' => '1'],
+        ];
+
+
         $view = [
             'latestArticles' => Articles::find($latestParams),
             'techArticle' => Articles::findFirst($techParams),
@@ -97,6 +104,7 @@ class SiteController extends Controller
             'politicsArticle' => Articles::find($politicsParams),
             'aroundArticle' => Articles::find($aroundParams),
             'globalArticle' => Articles::find($globalParams),
+            'headlines' => Headlines::find($headlinesParams),
         ];
 
         return View::make('blog/home', $view);
