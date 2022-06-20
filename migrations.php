@@ -3,32 +3,13 @@
 //define constant
 use core\Application;
 use core\Config;
-use Symfony\Component\Dotenv\Dotenv;
-
-const PROOT = __DIR__;
-const DS = DIRECTORY_SEPARATOR;
 
 
-require_once(PROOT . DS . 'lib/dotenv/Dotenv.php');
-require_once(PROOT . DS . 'lib/dotenv/Exception/ExceptionInterface.php');
-require_once(PROOT . DS . 'lib/dotenv/Exception/FormatException.php');
-require_once(PROOT . DS . 'lib/dotenv/Exception/FormatExceptionContext.php');
-require_once(PROOT . DS . 'lib/dotenv/Exception/PathException.php');
+require __DIR__ . '/vendor/autoload.php';
 
-spl_autoload_register(function ($classname){
-    $parts = explode('\\', $classname);
-    $class = end($parts);
-    array_pop($parts);
-    $path = strtolower(implode(DS, $parts));
-    $path = PROOT . DS . $path . DS . $class . '.php';
-    if(file_exists($path)) {
-        include($path);
-    }
-});
+$dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
-//Dotenv Loading
-$dotenv = new Dotenv();
-$dotenv->load(PROOT . DS . '.env');
 
 $config = [
     'db' => [

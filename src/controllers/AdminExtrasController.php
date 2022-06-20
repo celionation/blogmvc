@@ -8,7 +8,10 @@ use core\Request;
 use core\Response;
 use core\Session;
 use core\View;
+use Curl\Curl;
+use GuzzleHttp\Client;
 use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use src\classes\Permission;
 use src\models\Headlines;
 use src\models\Users;
@@ -34,22 +37,21 @@ class AdminExtrasController extends Controller
         Permission::permRedirect(['admin', 'author'], '');
     }
 
+
     public function rss()
     {
+//        $curl = new Curl();
+//        $curl->get('http://nattiblog.test/news');
+//
+//        if ($curl->error) {
+//            echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage . "\n";
+//        } else {
+//            echo 'Response:' . "\n";
+//            var_dump($curl->response);
+//        }
+
         $view = [
             'errors' => [],
-            'country' => [
-                '' => 'Select Country',
-                'NG' => 'Nigeria',
-                'US' => 'USA',
-                'GB' => 'UK'
-            ],
-            'category' => [
-                '' => 'Select Category',
-                'tech' => 'Tech',
-                'business' => 'Business',
-                'sports' => 'Sports'
-            ],
         ];
 
         return View::make('admin/extras/rss', $view);

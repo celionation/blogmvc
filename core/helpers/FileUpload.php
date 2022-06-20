@@ -8,7 +8,7 @@ class FileUpload
     public $size, $tmp, $ext, $name;
     public $maxSize = 2000000;
     public $allowedFileTypes = ['jpg' => 'image/jpeg', 'png' => 'image/png', 'gif' => 'image/gif'];
-    private $directory = ""; // default upload folder
+    private $directory =  "uploads"; // default upload folder
     public $required = true;
 
     public function __construct($field)

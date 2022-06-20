@@ -17,7 +17,7 @@ $total = $this->total;
         <div class="news-list">
             <?php if ($total !== 0) : ?>
                 <?php foreach ($articles as $article) : ?>
-                    <div class="card rounded-4 mt-2 articles">
+                    <article class="card rounded-4 mt-2 articles">
                         <div class="card">
                             <div class="thumbnail">
                                 <img src="<?= $article->img ?>" alt="" class="w-100">
@@ -41,7 +41,7 @@ $total = $this->total;
                                 <a href="/read/<?= $article->article_id ?>" class="btn btn-primary btn-sm">Read More</a>
                             </div>
                         </div>
-                    </div>
+                    </article>
                 <?php endforeach; ?>
             <?php else : ?>
                 <h2 class="text-center mx-auto mt-5 text-white bg-danger p-3">No Post Available</h2>

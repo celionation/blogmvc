@@ -54,3 +54,12 @@ function back()
     }
     return $prev;
 }
+
+function uploadLink($link)
+{
+    $uploadLink = $link;
+    if($uploadLink == 'localhost') {
+        $uploadLink = '/';
+    }
+    return $uploadLink;
+}

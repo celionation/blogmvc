@@ -54,9 +54,9 @@ $globalArticle = $this->globalArticle;
     <section class="section border-bottom border-3 border-danger">
         <div class="col-12 col-md-12 col-sm-12">
             <h2 class="text-uppercase ms-5 mb-4 mt-2 border-bottom border-3 border-danger text-start fw-bold"><i class="fas fa-arrow-circle-right text-danger"></i> News</h2>
-            <div class="row">
+            <article class="row">
                 <?php foreach ($latestArticles as $latestArticle): ?>
-                <div class="col-lg-4 col-md-6 col-sm-12 col-12 mb-2">
+                <article class="col-lg-4 col-md-6 col-sm-12 col-12 mb-2">
                     <div class="card position-relative overflow-hidden">
                         <div class="thumbnail_latest">
                             <img src="<?= $latestArticle->img ?>" alt="" class="w-100 img-fluid">
@@ -68,7 +68,7 @@ $globalArticle = $this->globalArticle;
                             </a>
                         </div>
                     </div>
-                </div>
+                </article>
                 <?php endforeach; ?>
             </div>
         </div>
@@ -79,7 +79,7 @@ $globalArticle = $this->globalArticle;
     <section class="section border-bottom border-top border-3 border-danger">
         <div class="row mb-3">
             <?php if($techArticle !== false): ?>
-            <div class="col-12 col-md-6 col-sm-12">
+            <article class="col-12 col-md-6 col-sm-12">
                 <h2 class="text-uppercase ms-5 mb-4 mt-2 border-bottom border-3 border-danger text-start fw-bold"><i class="fas fa-arrow-circle-right text-danger"></i> Tech</h2>
                 <div class="card position-relative overflow-hidden">
                     <div class="mini-img">
@@ -92,11 +92,11 @@ $globalArticle = $this->globalArticle;
                         </a>
                     </div>
                 </div>
-            </div>
+            </article>
             <?php endif; ?>
 
             <?php if($storyArticle !== false): ?>
-            <div class="col-12 col-md-6 col-sm-12">
+            <article class="col-12 col-md-6 col-sm-12">
                 <h2 class="text-uppercase ms-5 mb-4 mt-2 border-bottom border-3 border-danger text-start fw-bold"> <i class="fas fa-arrow-circle-right text-danger"></i> Story</h2>
                 <div class="card position-relative overflow-hidden">
                     <div class="mini-img">
@@ -109,7 +109,7 @@ $globalArticle = $this->globalArticle;
                         </a>
                     </div>
                 </div>
-            </div>
+            </article>
             <?php endif; ?>
         </div>
     </section>
@@ -123,19 +123,19 @@ $globalArticle = $this->globalArticle;
                 <h2 class="text-uppercase ms-5 mb-4 mt-2 border-bottom border-3 border-danger text-start fw-bold"><i class="fas fa-arrow-circle-right text-danger"></i> SPORTS</h2>
                 <div class="row">
                     <?php foreach ($sportsArticle as $spa): ?>
-                        <div class="col-12 col-lg-3 col-md-4 col-sm-6 mb-2">
-                        <div class="card position-relative overflow-hidden">
-                            <div class="mini-img">
-                                <img src="<?= $spa->img ?>" alt="" class="w-100 img-fluid">
+                        <article class="col-12 col-lg-3 col-md-4 col-sm-6 mb-2">
+                            <div class="card position-relative overflow-hidden">
+                                <div class="mini-img">
+                                    <img src="<?= $spa->img ?>" alt="" class="w-100 img-fluid">
+                                </div>
+                                <div class="card-header position-absolute bottom-0 pt-4">
+                                    <a href="/read/<?= $spa->article_id ?>" class="text-dark">
+                                        <h2 class="text-shadow h6 text-capitalize border-bottom border-3 border-danger pb-2 text-white text-start">
+                                            <?= $spa->title ?></h2>
+                                    </a>
+                                </div>
                             </div>
-                            <div class="card-header position-absolute bottom-0 pt-4">
-                                <a href="/read/<?= $spa->article_id ?>" class="text-dark">
-                                    <h2 class="text-shadow h6 text-capitalize border-bottom border-3 border-danger pb-2 text-white text-start">
-                                        <?= $spa->title ?></h2>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                        </article>
                     <?php endforeach; ?>
                 </div>
             </div>
@@ -152,7 +152,7 @@ $globalArticle = $this->globalArticle;
                 <h2 class="text-uppercase ms-5 mb-4 mt-2 border-bottom border-3 border-danger text-start fw-bold"><i class="fas fa-arrow-circle-right text-danger"></i> POLITICS</h2>
                 <div class="row">
                     <?php foreach ($politicsArticle as $ppa): ?>
-                        <div class="col-12 col-lg-3 col-md-4 col-sm-6 mb-2">
+                        <article class="col-12 col-lg-3 col-md-4 col-sm-6 mb-2">
                             <div class="card position-relative overflow-hidden">
                                 <div class="mini-img">
                                     <img src="<?= $ppa->img ?>" alt="" class="w-100 img-fluid">
@@ -164,7 +164,7 @@ $globalArticle = $this->globalArticle;
                                     </a>
                                 </div>
                             </div>
-                        </div>
+                        </article>
                     <?php endforeach; ?>
                 </div>
             </div>
@@ -181,7 +181,7 @@ $globalArticle = $this->globalArticle;
                 <h2 class="text-uppercase ms-5 mb-4 mt-2 border-bottom border-3 border-danger text-start fw-bold"><i class="fas fa-arrow-circle-right text-danger"></i> Around CNB</h2>
                 <div class="row">
                     <?php foreach ($aroundArticle as $aa): ?>
-                    <div class="col-12 col-lg-3 col-md-4 col-sm-6 mb-2">
+                    <article class="col-12 col-lg-3 col-md-4 col-sm-6 mb-2">
                         <div class="card position-relative overflow-hidden">
                             <div class="mini-img">
                                 <img src="<?= $aa->img ?>" alt="" class="w-100 img-fluid">
@@ -193,7 +193,7 @@ $globalArticle = $this->globalArticle;
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    </article>
                     <?php endforeach; ?>
                 </div>
             </div>
@@ -210,7 +210,7 @@ $globalArticle = $this->globalArticle;
                 <h2 class="text-uppercase ms-5 mb-4 mt-2 border-bottom border-3 border-danger text-start fw-bold"><i class="fas fa-arrow-circle-right text-danger"></i> Global</h2>
                 <div class="row">
                     <?php foreach ($globalArticle as $glo): ?>
-                    <div class="col-12 col-lg-3 col-md-4 col-sm-6 mb-2">
+                    <article class="col-12 col-lg-3 col-md-4 col-sm-6 mb-2">
                         <div class="card position-relative overflow-hidden">
                             <div class="mini-img">
                                 <img src="<?= $glo->img ?>" alt="" class="w-100 img-fluid">
@@ -222,7 +222,7 @@ $globalArticle = $this->globalArticle;
                                 </a>
                             </div>
                         </div>
-                    </div>
+                    </article>
                     <?php endforeach; ?>
                 </div>
             </div>

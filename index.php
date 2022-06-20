@@ -4,36 +4,31 @@
 use core\Application;
 use core\Config;
 use src\models\Users;
-use Symfony\Component\Dotenv\Dotenv;
 
-const PROOT = __DIR__;
+
+require __DIR__ . '/vendor/autoload.php';
+
+$dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+//const PROOT = __DIR__;
 const DS = DIRECTORY_SEPARATOR;
 const TimeZone = 'Africa/Lagos';
 
-const ROOT = '/';
+define("ROOT", Config::get('ROOT_DIR'));
 
 require_once __DIR__ . '/config/functions.php';
 
-require_once(PROOT . DS . 'lib/dotenv/Dotenv.php');
-require_once(PROOT . DS . 'lib/dotenv/Exception/ExceptionInterface.php');
-require_once(PROOT . DS . 'lib/dotenv/Exception/FormatException.php');
-require_once(PROOT . DS . 'lib/dotenv/Exception/FormatExceptionContext.php');
-require_once(PROOT . DS . 'lib/dotenv/Exception/PathException.php');
-
-spl_autoload_register(function ($classname){
-    $parts = explode('\\', $classname);
-    $class = end($parts);
-    array_pop($parts);
-    $path = strtolower(implode(DS, $parts));
-    $path = PROOT . DS . $path . DS . $class . '.php';
-    if(file_exists($path)) {
-        include($path);
-    }
-});
-
-//Dotenv Loading
-$dotenv = new Dotenv();
-$dotenv->load(PROOT . DS . '.env');
+//spl_autoload_register(function ($classname){
+//    $parts = explode('\\', $classname);
+//    $class = end($parts);
+//    array_pop($parts);
+//    $path = strtolower(implode(DS, $parts));
+//    $path = PROOT . DS . $path . DS . $class . '.php';
+//    if(file_exists($path)) {
+//        include($path);
+//    }
+//});
 
 error_reporting(E_ALL);
 ini_set('display_errors', Config::get('APP_DEBUG'));
@@ -78,7 +73,7 @@ $url = preg_replace('/(\?.+)/', '', $url);
 
 $currentPage = $url;
 
-//\core\helpers\CoreHelpers::dnd($currentPage);
+//\core\helpers\CoreHelpers::dnd($uploadLink);
 
 require __DIR__ . '/routes/web.php';
 

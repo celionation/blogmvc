@@ -2,6 +2,7 @@
 
 namespace src\controllers;
 
+use core\Application;
 use core\Controller;
 use core\helpers\CoreHelpers;
 use core\View;
