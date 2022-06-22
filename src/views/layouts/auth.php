@@ -22,7 +22,7 @@ use core\Session;
     <link rel="stylesheet" href="<?= asset('/assets/css/bootstrap.min.css') ?>">
     <!-- Custom styles -->
     <link rel="stylesheet" href="<?= asset('/assets/css/auth.css') ?>?v=<?= Config::get("version") ?>">
-    <title>Laraton Blog MVC | <?= $this->title ?></title>
+    <title>CNBlog | <?= $this->title ?></title>
 </head>
 <body>
 <?= Session::displaySessionAlerts() ?>

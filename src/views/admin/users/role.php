@@ -42,7 +42,7 @@ $this->title = 'Users Page';
                 <a href="/admin/block_user/<?= $user->id ?>" class="btn btn-sm <?= $user->blocked ? "btn-warning" : "btn-secondary" ?>">
                     <?= $user->blocked ? "Unblock" : "Block" ?>
                 </a>
-                <button class="btn btn-sm btn-danger" onclick="confirmDelete('<?= $user->id ?>')">Delete</button>
+                <button class="btn btn-sm btn-danger" onclick="confirmDelete('<?= $user->user_id ?>')">Delete</button>
             </td>
         </tr>
     <?php endforeach ?>

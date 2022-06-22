@@ -8,6 +8,7 @@ use core\Controller;
 use core\helpers\CoreHelpers;
 use core\helpers\File;
 use core\helpers\FileUpload;
+use core\helpers\GenerateToken;
 use core\Request;
 use core\Response;
 use core\Session;
@@ -432,11 +433,31 @@ class AdminController extends Controller
         Response::redirect('admin/users');
     }
 
+    /**
+     * @throws Exception
+     */
     public function deleteUser(Request $request)
     {
+        Permission::permRedirect(['admin'], 'admin/dashboard');
         $id = $request->getParam('id');
 
-        CoreHelpers::dnd($id);
+        $params = [
+            'conditions' => "user_id = :user_id",
+            'bind' => ['user_id' => $id],
+        ];
+
+        $user = Users::findFirst($params);
+
+        $msgType = 'danger';
+        $msg = 'User cannot be deleted';
+
+        if($user && $user->user_id !== $this->currentUser->user_id) {
+            $user->delete();
+            $msgType = 'success';
+            $msg = 'User deleted';
+        }
+        Session::msg($msg, $msgType);
+        Response::redirect('admin/users');
     }
 
     /**
@@ -534,14 +555,27 @@ class AdminController extends Controller
 
         if($request->isPost()) {
             Session::csrfCheck();
-            $fields = ['sitename', 'manager', 'logo', 'copyright', 'description', 'keywords', 'mission_aim', 'about_founder'];
-            foreach ($fields as $field) {
-                $settings->{$field} = $request->get($field);
-            }
+
+            $settings->setting_id = GenerateToken::randomString(6);
+            $settings->name = 'info';
+            $settings->value_one = $request->get('value_one');
+            $settings->value_two = $request->get('value_two');
+            $settings->value_three = $request->get('value_three');
+            $settings->value_four = $request->get('value_four');
+
+            $upload = new FileUpload('logo');
+
+            $upload->directory('uploads/settings');
 
             if($settings->save()) {
+                if(!empty($upload->tmp)) {
+                    if($upload->upload()) {
+                        $settings->value_three = $upload->fc;
+                        $settings->save();
+                    }
+                }
                 Session::msg('Saved!', 'success');
-                Response::redirect('admin/settings');
+                Response::redirect('admin/settings/info');
             }
         }
 
@@ -571,54 +605,13 @@ class AdminController extends Controller
         return View::make('admin/settings/email', $view);
     }
 
-    /**
-     * @throws Exception
-     */
-    public function fieldsSettings(Request $request)
+    public function seoSettings(): View
     {
-        Permission::permRedirect(['admin'], 'admin/settings');
-
-        $settings = new Settings();
-
-        if($request->isPost()) {
-            Session::csrfCheck();
-            $settings->name = strtolower($request->get('name'));
-
-            if ($settings->save()) {
-                Session::msg("{$settings->name} added successfully.", 'success');
-                Response::redirect('admin/settings/fields');
-            }
-        }
-
         $view = [
-            'errors' => $settings->getErrors(),
-            'settings' => Settings::find(),
+            'errors' => [],
         ];
 
-        return View::make('admin/settings/fields', $view);
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function delete_field(Request $request)
-    {
-        Permission::permRedirect(['admin'], 'admin/settings');
-
-        $id = $request->getParam('id');
-
-        $params = [
-            'conditions' => "id = :id",
-            'bind' => ['id' => $id]
-        ];
-
-        $settings = Settings::findFirst($params);
-
-        if($settings) {
-            Session::msg('Field Deleted...');
-            $settings->delete();
-            Response::redirect('admin/settings/fields');
-        }
+        return View::make('admin/settings/seo', $view);
     }
 
     /**

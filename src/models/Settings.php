@@ -10,7 +10,8 @@ use Exception;
 class Settings extends Model
 {
     protected static string $table = 'settings';
-    public $name;
+    public $name, $value_one, $status_one = 0, $value_two, $status_two = 0, $value_three, $status_three = 0, $value_four, $status_four = 0, $value_five, $status_five = 0, $value_six, $status_six = 0;
+    public string $setting_id;
 
     /**
      * @throws Exception

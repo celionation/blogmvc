@@ -12,6 +12,12 @@
             </a>
         </li>
         <li>
+            <a href="/admin/settings/seo" class="nav-link bg-primary text-white mb-2">
+                <i class="fas fa-plus mr-2"></i>
+                SEO Settings
+            </a>
+        </li>
+        <li>
             <a href="/admin/settings/email" class="nav-link bg-primary text-white mb-2">
                 <i class="fas fa-envelope-open-text mr-2"></i>
                 E-Mail Settings
@@ -21,12 +27,6 @@
             <a href="/admin/settings/social" class="nav-link bg-primary text-white mb-2">
                 <i class="fas fa-link mr-2"></i>
                 Social Settings
-            </a>
-        </li>
-        <li>
-            <a href="/admin/settings/fields" class="nav-link bg-primary text-white mb-2">
-                <i class="fas fa-plus mr-2"></i>
-                Fields Settings
             </a>
         </li>
     </ul>

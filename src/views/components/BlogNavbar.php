@@ -9,8 +9,8 @@ use core\helpers\Navigation;
 
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">
-            <img src="/assets/img/logocolor.jpg" alt="NattiFlash" style="width: 65px; width: 65px;">
+        <a class="navbar-brand" href="/">
+            <img src="/assets/img/logocolor.jpg" alt="CNBlog" style="width: 65px; width: 65px;">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">

@@ -24,7 +24,7 @@ use core\Session;
     <link rel="stylesheet" href="<?= asset('/assets/vendor/datatables/dataTables.bootstrap4.css') ?>">
     <!-- Custom styles -->
     <link rel="stylesheet" href="<?= asset('/assets/css/admin/sb-admin.css') ?>">
-    <title>Blog MVC ADMIN DASHBOARD | <?= $this->title ?></title>
+    <title>CNBlog | <?= $this->title ?></title>
 
     <style>
         ::selection{
