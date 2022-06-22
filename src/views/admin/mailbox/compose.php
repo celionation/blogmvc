@@ -9,6 +9,17 @@ $this->title = 'Admin Mailbox Compose';
 
 ?>
 
+<script src="<?= asset('/assets/vendor/ckeditor5/ckeditor.js') ?>"></script>
+<script>
+    window.addEventListener('load', function() {
+        ClassicEditor
+            .create(document.querySelector('#body'))
+            .catch(error => {
+                console.error(error);
+            });
+    });
+</script>
+
 <!-- Main content -->
 <section class="content">
     <div class="container-fluid">

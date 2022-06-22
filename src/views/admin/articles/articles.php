@@ -25,6 +25,7 @@ $this->total = $total;
             <th>Title</th>
             <th>Author</th>
             <th>Category</th>
+            <th>Comments(No)</th>
             <th>Create Date</th>
             <th>Status</th>
             <th class="text-end">Actions</th>
@@ -37,11 +38,12 @@ $this->total = $total;
                 <td><img src="<?= asset("/$article->img") ?>" class="image-fluid" width="60" height="60"> &nbsp;<?= StringFormat::Excerpt($article->title, 50) ?></td>
                 <td><?= $article->fname . ' ' . $article->lname ?></td>
                 <td><?= $article->category ?></td>
+                <td class="text-center"><span class="text-white badge bg-primary"><?= commentsTotal($article->article_id) ?></span></td>
                 <td><?= TimeFormat::TimeInAgo($article->created_at) ?></td>
                 <td><?= $article->status ?></td>
                 <td class="text-end">
-                    <a href="/admin/article/<?= $article->id ?>" class="btn btn-sm btn-info">Edit</a>
-                    <button class="btn btn-sm btn-danger" onclick="deleteArticle('<?= $article->id ?>')">Delete</button>
+                    <a href="/admin/article/<?= $article->id ?>" data-bs-toggle="tooltip" title="Edit" class="btn btn-sm btn-info"><i class="fas fa-edit"></i></a>
+                    <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" title="Delete" onclick="deleteArticle('<?= $article->id ?>')"><i class="fas fa-trash-alt"></i></button>
                 </td>
             </tr>
         <?php endforeach; ?>

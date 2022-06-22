@@ -11,7 +11,7 @@ class Articles extends Model
 {
     protected static string $table = 'articles';
 
-    public $id, $created_at, $updated_at, $user_id, $title, $body, $img, $status = 'private', $category_id = 0, $region_id = 0;
+    public $id, $created_at, $updated_at, $user_id, $title, $body, $img, $status = 'private', $category_id = 0, $region_id = 0, $views = 0, $copyright = '';
 
     /**
      * @throws Exception

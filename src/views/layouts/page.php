@@ -2,6 +2,7 @@
 
 
 use core\Config;
+use core\Session;
 
 
 ?>
@@ -28,6 +29,7 @@ use core\Config;
 <?= component('BlogNavbar') ?>
 
 <?= component('PageNav') ?>
+<?= Session::displaySessionAlerts(); ?>
 <main>
     <div class="container-fluid mt-2">
         <div class="row">

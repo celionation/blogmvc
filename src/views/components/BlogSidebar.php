@@ -2,6 +2,7 @@
 
 
 use core\forms\Form;
+use src\classes\BlogSidebar;
 
 
 ?>
@@ -9,9 +10,13 @@ use core\forms\Form;
 
 <div class="col-12 col-lg-4 col-md-4 col-sm-12">
     <div class="position-sticky" style="top: 2rem;">
+        <!--  Top Adverts  -->
         <div class="card mb-2">
             <img src="/assets/img/older_posts/older_posts_6.jpg" alt="" class="w-100 img-fluid rounded-3">
         </div>
+        <!--  // Top Adverts  -->
+
+        <!--  NewsLetters  -->
         <div class="card">
             <h2 class="text-shadow h4 text-uppercase rounded-3 text-center border-bottom border-3 border-danger pb-2">
                 Subscribe</h2>
@@ -27,6 +32,8 @@ use core\forms\Form;
                 </div>
             </div>
         </div>
+        <!--  // NewsLetters  -->
+
         <!-- Share Link -->
         <div class="card mb-2 bg-light my-2">
             <div class="card-header sidebar d-flex justify-content-between px-3 py-3 align-items-start">
@@ -36,76 +43,49 @@ use core\forms\Form;
             </div>
         </div>
         <!-- // Share Link -->
+
+        <!--  New Updates  -->
+        <?php $mostReads = BlogSidebar::mostRead() ?>
         <div class="card mb-2 mt-2">
             <h2 class="text-shadow h4 text-uppercase rounded-3 p-2 text-start border-bottom border-3 border-danger pb-1">
-                News Updates</h2>
+                Most Viewed</h2>
             <div class="card-body">
                 <ul class="list-group list-group-flush">
+                    <?php foreach ($mostReads as $mostRead): ?>
                     <li class="list-group-item">
-                        <a href="#" class="text-black">
+                        <a href="/read/<?= $mostRead->article_id ?>" class="text-black">
                             <h2 class="text-shadow h6 text-capitalize border-bottom border-3 border-danger pb-2">
-                                Twitter's New Retweet With Comment Counter Is Now Available On Andriod & Web</h2>
+                                <?= $mostRead->title ?></h2>
                         </a>
                     </li>
-                    <li class="list-group-item">
-                        <a href="#" class="text-black">
-                            <h2 class="text-shadow h6 text-capitalize border-bottom border-3 border-danger pb-2">
-                                Twitter's New Retweet With Comment Counter Is Now Available On Andriod & Web</h2>
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a href="#" class="text-black">
-                            <h2 class="text-shadow h6 text-capitalize border-bottom border-3 border-danger pb-2">
-                                Twitter's New Retweet With Comment Counter Is Now Available On Andriod & Web</h2>
-                        </a>
-                    </li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
         </div>
-        <div class="card position-relative overflow-hidden mb-3">
-            <img src="/assets/img/older_posts/older_posts_4.jpg" alt="" class="w-100 img-fluid rounded-3">
-            <div class="text position-absolute bottom-0">
-                <a href="#" class="text-white">
-                    <h2 class="text-shadow h5 text-capitalize border-bottom border-3 border-danger p-3">Twitter's New Retweet With Comment Counter Is Now Available On Andriod & Web</h2>
-                </a>
-            </div>
-        </div>
-        <div class="card position-relative overflow-hidden mb-3">
-            <img src="/assets/img/older_posts/older_posts_5.jpg" alt="" class="w-100 img-fluid rounded-3">
-            <div class="text position-absolute bottom-0">
-                <a href="#" class="text-white">
-                    <h2 class="text-shadow h5 text-capitalize border-bottom border-3 border-danger p-3">Twitter's New Retweet With Comment Counter Is Now Available On Andriod & Web</h2>
-                </a>
-            </div>
-        </div>
+        <!--  //News Updates  -->
 
-        <div class="card mb-2">
-            <img src="/assets/img/tags/travel-tag.jpg" alt="" class="w-100 img-fluid rounded-3">
-        </div>
-        <!-- Tag Section -->
-        <div class="card mt-3">
-            <h2 class="text-shadow h4 text-uppercase rounded-3 text-center border-bottom border-3 border-danger pb-2">
-                Tags</h2>
-            <div class="card-body">
-                <a href="#">
-                    <span class="btn btn-primary rounded mt-2">Software</span>
-                </a>
-                <a href="#">
-                    <span class="btn btn-primary rounded mt-2">Technology</span>
-                </a>
-                <a href="#">
-                    <span class="btn btn-primary rounded mt-2">Travel</span>
-                </a>
-                <a href="#">
-                    <span class="btn btn-primary rounded mt-2">Love</span>
-                </a>
-                <a href="#">
-                    <span class="btn btn-primary rounded mt-2">Javascript</span>
-                </a>
-                <a href="#">
-                    <span class="btn btn-primary rounded mt-2">PHP</span>
+        <!--  News -->
+        <?php $sideNews = BlogSidebar::sideNews() ?>
+        <?php foreach ($sideNews as $news): ?>
+        <div class="card position-relative overflow-hidden mb-3">
+            <div class="mini-img">
+                <img src="<?= ROOT . $news->img ?>" alt="" class="w-100 img-fluid rounded-3">
+            </div>
+            <div class="text position-absolute bottom-0">
+                <a href="<?= $news->article_id ?>" class="text-white">
+                    <h2 class="text-shadow bg-shadow h5 text-capitalize border-bottom border-3 border-danger p-3"><?= $news->title ?></h2>
                 </a>
             </div>
         </div>
+        <?php endforeach; ?>
+
+        <!--  // News  -->
+
+        <!--  Advert Down  -->
+        <div class="card mb-2">
+            <img src="/assets/img/older_posts/older_posts_1.jpg" alt="" class="w-100 img-fluid rounded-3">
+        </div>
+        <!--  // Advert Down  -->
+
     </div>
 </div>

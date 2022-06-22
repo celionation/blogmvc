@@ -44,6 +44,10 @@ a {
     text-decoration: none !important;
 }
 
+.active {
+    color: red !important;
+}
+
 img {
     display: block;
     height: 100%;
@@ -91,7 +95,7 @@ img {
 }
 
 .text-shadow {
-    text-shadow: 0 0 2px #000;
+    text-shadow: 1px 0 2px #000;
 }
 
 .search-form {

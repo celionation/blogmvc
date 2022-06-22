@@ -26,12 +26,12 @@ $this->title = 'Admin contact Messages';
 
 <div class="contactMsg">
     <?php foreach ($contactMsgs as $contactMsg) : ?>
-        <div class="alert alert-success" role="alert">
+        <div class="alert alert-secondary" role="alert">
             <h5 class="alert-heading"><span class="text-danger">#</span> <?= $contactMsg->fullname ?></h5>
             <hr>
-            <h6 class="text-warning">Subject: <span class="text-success"><?= $contactMsg->subject ?></span></h6>
+            <h6 class="text-warning">Subject: <span class="text-success h5 text-capitalize"><?= $contactMsg->subject ?></span></h6>
             <hr>
-            <p><?= $contactMsg->message ?></p>
+            <p class="text-black h3 text-capitalize"><?= $contactMsg->message ?></p>
             <hr>
             <div class="d-flex justify-content-between align-items-center">
                 <p class="mb-0"><?= $contactMsg->email ?></p>

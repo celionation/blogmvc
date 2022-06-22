@@ -3,6 +3,8 @@
 
 use core\Config;
 use core\View;
+use src\models\Articles;
+use src\models\Comments;
 
 function asset($url)
 {
@@ -63,3 +65,37 @@ function uploadLink($link)
     }
     return $uploadLink;
 }
+
+/**
+ * @throws Exception
+ */
+function commentsTotal($id): int
+{
+    $commentsParams = [
+        'columns' => "comments.*, articles.article_id",
+        'conditions' => "articles.article_id = :article_id",
+        'bind' => ['article_id' => $id],
+        'joins' => [
+            ['articles', 'comments.article_id = articles.article_id'],
+        ],
+    ];
+
+    return Comments::findTotal($commentsParams);
+}
+
+
+/**
+ * @throws Exception
+ */
+//function sidebar()
+//{
+//    $params = [
+//        'columns' => "title, img, article_id, views",
+//        'conditions' => "status = :status AND views > '0'",
+//        'bind' => ['status' => 'public'],
+//        'limit' => '6',
+//        'order' => 'views DESC'
+//    ];
+//
+//    return $articles = Articles::find($params);
+//}

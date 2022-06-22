@@ -21,6 +21,6 @@
         "psr/container": "^2.0",
         "phpmailer/phpmailer": "^6.6",
         "php-curl-class/php-curl-class": "^9.6",
-        "ext-gd": "*"
+        "symfony/css-selector": "^6.1"
     }
 }

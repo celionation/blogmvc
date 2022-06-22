@@ -40,7 +40,7 @@ class AdminController extends Controller
         Permission::permRedirect(['admin', 'author'], '');
     }
 
-    public function dashboard()
+    public function dashboard(): View
     {
         $view = [];
 
@@ -50,7 +50,7 @@ class AdminController extends Controller
     /**
      * @throws Exception
      */
-    public function articles()
+    public function articles(): View
     {
         Permission::permRedirect(['admin', 'author'], 'admin/dashboard');
 
@@ -80,7 +80,7 @@ class AdminController extends Controller
 
         $view = [
             'articles' => Articles::find($params),
-            'total' => Articles::findTotal($params),
+            'total' => Articles::findTotal($params)
         ];
 
         return View::make('admin/articles/articles', $view);
@@ -89,7 +89,7 @@ class AdminController extends Controller
     /**
      * @throws Exception
      */
-    public function article(Request $request)
+    public function article(Request $request): View
     {
         Permission::permRedirect(['admin', 'author'], 'admin/dashboard');
 
@@ -186,7 +186,7 @@ class AdminController extends Controller
         $article = Articles::findFirst($params);
         if ($article) {
             Session::msg("Article Deleted Successfully.", 'success');
-            unlink(Application::$ROOT_DIR . $article->img);
+            unlink(Application::$ROOT_DIR . '/' . $article->img);
             $article->delete();
         } else {
             Session::msg("You do not have permission to delete that article");
@@ -197,7 +197,7 @@ class AdminController extends Controller
     /**
      * @throws Exception
      */
-    public function categories(Request $request)
+    public function categories(Request $request): View
     {
         Permission::permRedirect(['admin'], 'admin/dashboard');
 
@@ -263,7 +263,7 @@ class AdminController extends Controller
     /**
      * @throws Exception
      */
-    public function regions(Request $request)
+    public function regions(Request $request): View
     {
         Permission::permRedirect(['admin'], 'admin/dashboard');
 
@@ -329,10 +329,13 @@ class AdminController extends Controller
     /**
      * @throws Exception
      */
-    public function users()
+    public function users(): View
     {
         Permission::permRedirect(['admin'], 'admin/dashboard');
-        $params = ['order' => 'lname', 'fname'];
+        $params = [
+            'conditions' => "acl != 'guests'",
+            'order' => 'lname', 'fname'
+        ];
         $params = Users::mergeWithPagination($params);
 
         $view = [
@@ -346,7 +349,7 @@ class AdminController extends Controller
     /**
      * @throws Exception
      */
-    public function createUser(Request $request)
+    public function createUser(Request $request): View
     {
         Permission::permRedirect(['admin'], 'admin/dashboard');
 
@@ -413,7 +416,55 @@ class AdminController extends Controller
     /**
      * @throws Exception
      */
-    public function comments()
+    public function blockUser(Request $request)
+    {
+        Permission::permRedirect(['admin'], 'admin/dashboard');
+        $id = $request->getParam('id');
+
+        $user = Users::findById($id);
+
+        if($user) {
+            $user->blocked = $user->blocked? 0 : 1;
+            $user->save();
+            $msg = $user->blocked? "User blocked." : "User unblocked.";
+        }
+        Session::msg($msg, 'success');
+        Response::redirect('admin/users');
+    }
+
+    public function deleteUser(Request $request)
+    {
+        $id = $request->getParam('id');
+
+        CoreHelpers::dnd($id);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function userRole(Request $request): View
+    {
+        $role = $request->getParam('role');
+
+        Permission::permRedirect(['admin'], 'admin/dashboard');
+        $params = [
+            'conditions' => "acl = '{$role}'",
+            'order' => 'lname', 'fname'
+        ];
+        $params = Users::mergeWithPagination($params);
+
+        $view = [
+            'users' => Users::find($params),
+            'total' => Users::findTotal($params),
+        ];
+
+        return View::make('admin/users/role', $view);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function comments(): View
     {
         Permission::permRedirect(['admin', 'author'], 'admin/dashboard');
 
@@ -475,7 +526,7 @@ class AdminController extends Controller
     /**
      * @throws Exception
      */
-    public function settings(Request $request)
+    public function settings(Request $request): View
     {
         Permission::permRedirect(['admin', 'author'], 'admin/dashboard');
 
@@ -502,7 +553,7 @@ class AdminController extends Controller
         return View::make('admin/settings/settings', $view);
     }
 
-    public function socialSettings()
+    public function socialSettings(): View
     {
         $view = [
             'errors' => [],
@@ -511,7 +562,7 @@ class AdminController extends Controller
         return View::make('admin/settings/social', $view);
     }
 
-    public function emailSettings()
+    public function emailSettings(): View
     {
         $view = [
             'errors' => [],
@@ -573,7 +624,7 @@ class AdminController extends Controller
     /**
      * @throws Exception
      */
-    public function contactMessages()
+    public function contactMessages(): View
     {
         $view = [
             'contactMsgs' => contactMessages::find(),
@@ -607,7 +658,7 @@ class AdminController extends Controller
         Response::redirect('admin/contact_messages');
     }
 
-    public function newsletterMail()
+    public function newsletterMail(): View
     {
         $view = [];
 
@@ -617,7 +668,7 @@ class AdminController extends Controller
     /**
      * @throws Exception
      */
-    public function subscribers()
+    public function subscribers(): View
     {
         $params = [
             'order' => 'created_at DESC'

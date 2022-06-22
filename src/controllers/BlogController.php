@@ -59,6 +59,31 @@ class BlogController extends Controller
     /**
      * @throws Exception
      */
+    public function categoryNews(Request $request): View
+    {
+        $this->setLayout('page');
+
+        $id = $request->getParam('id');
+
+        $currentPage = $_GET['page'] ?? 1;
+
+        $pageData = $this->paginateCategoryNews($id, $currentPage);
+        $pageNumbers = $this->getPaginationNumbers($currentPage, $pageData['numberOfPages']);
+
+        $view = [
+            'articles' => $pageData['news'],
+            'pageNumbers' => $pageNumbers,
+            'currentPage' => $currentPage,
+            'prevPage' => $pageData['prevPage'],
+            'nextPage' => $pageData['nextPage'],
+        ];
+
+        return View::make('blog/news', $view);
+    }
+
+    /**
+     * @throws Exception
+     */
     public function read(Request $request)
     {
         $id = $request->getParam('article_id');
@@ -73,8 +98,10 @@ class BlogController extends Controller
             ],
             'bind' => ['id' => $id]
         ];
+
         $article = Articles::findFirst($params);
         if (!$article) Response::redirect('read/articleNotFound');
+
         if (empty($article->category_id) || empty($article->region_id)) {
             $article->category_id = 0;
             $article->category = "Uncategorized";
@@ -100,6 +127,11 @@ class BlogController extends Controller
             if($comment->save()) {
                 Response::redirect("read/{$id}");
             }
+        }
+
+        if($article) {
+            $article->views += 1;
+            $article->save();
         }
 
         $view = [
@@ -164,6 +196,40 @@ class BlogController extends Controller
         $numberOfPages = ceil($total / $recordsPerPage);
 
         $news = Articles::find($params);
+
+        return [
+            'news' => $news,
+            'prevPage' => $currentPage > 1 ? $currentPage - 1 : false,
+            'nextPage' => $currentPage + 1 <= $numberOfPages ? $currentPage + 1 : false,
+            'numberOfPages' => $numberOfPages,
+        ];
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function paginateCategoryNews($catId, $currentPage = 1, $recordsPerPage = 10)
+    {
+        $params = [
+            'columns' => "articles.*, users.username, categories.name as category, regions.name as region",
+            'conditions' => "categories.name = :name AND articles.status = :status",
+            'bind' => ['status' => 'public', 'name' => $catId],
+            'joins' => [
+                ['users', 'articles.user_id = users.user_id'],
+                ['categories', 'articles.category_id = categories.id', 'categories', 'LEFT'],
+                ['regions', 'articles.region_id = regions.id', 'regions', 'LEFT']
+            ],
+            'limit' => $recordsPerPage,
+            'offset' => ($currentPage - 1) * $recordsPerPage,
+            'order' => 'articles.created_at DESC'
+        ];
+
+        $total = Articles::findTotal();
+        $numberOfPages = ceil($total / $recordsPerPage);
+
+        $news = Articles::find($params);
+
+//        CoreHelpers::dnd($numberOfPages);
 
         return [
             'news' => $news,

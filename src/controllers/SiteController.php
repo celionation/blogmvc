@@ -5,10 +5,15 @@ namespace src\controllers;
 use core\Application;
 use core\Controller;
 use core\helpers\CoreHelpers;
+use core\helpers\GenerateToken;
+use core\Request;
+use core\Response;
+use core\Session;
 use core\View;
 use Exception;
 use src\models\Articles;
 use src\models\Headlines;
+use src\models\Newsletters;
 use src\models\Users;
 
 class SiteController extends Controller
@@ -109,6 +114,30 @@ class SiteController extends Controller
         ];
 
         return View::make('blog/home', $view);
+    }
+
+
+    /**
+     * @throws Exception
+     */
+    public function newsletter(Request $request)
+    {
+        $newsLetter = new NewsLetters();
+
+        if($request->isPost()) {
+            Session::csrfCheck();
+            $newsLetter->email = $request->get('email');
+            $newsLetter->newsletter_id = GenerateToken::randomString(6);
+
+            if (empty($newsLetter->getErrors())) {
+                if ($newsLetter->save()) {
+                    Session::msg('Thanks for Subscribing. will get to you daily.', 'success');
+                    Response::redirect('news');
+                }
+            }
+            Session::msg('Error Occurred.', 'warning');
+            Response::redirect('news');
+        }
     }
 
 }

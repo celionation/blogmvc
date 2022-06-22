@@ -9,6 +9,17 @@ $this->title = 'Admin NewsLetter';
 
 ?>
 
+<script src="<?= asset('/assets/vendor/ckeditor5/ckeditor.js') ?>"></script>
+<script>
+    window.addEventListener('load', function() {
+        ClassicEditor
+            .create(document.querySelector('#body'))
+            .catch(error => {
+                console.error(error);
+            });
+    });
+</script>
+
 <div class="card card-primary card-outline">
     <div class="card-header">
         <h5 class="card-title m-0">Message All Subscribers</h5>

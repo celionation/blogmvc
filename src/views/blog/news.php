@@ -8,6 +8,8 @@ $this->title = 'News Page';
 
 $total = $this->total;
 
+global $currentLink;
+
 
 ?>
 
@@ -15,12 +17,12 @@ $total = $this->total;
     <!-- news -->
     <div class="news-page">
         <div class="news-list">
-            <?php if ($total !== 0) : ?>
+            <?php if (!empty($articles)) : ?>
                 <?php foreach ($articles as $article) : ?>
                     <article class="card rounded-4 mt-2 articles">
                         <div class="card">
                             <div class="thumbnail">
-                                <img src="<?= $article->img ?>" alt="" class="w-100">
+                                <img src="<?= ROOT . $article->img ?>" class="w-100">
                             </div>
                             <div class="card-header">
                                 <a href="#" class="text-dark">
@@ -54,19 +56,19 @@ $total = $this->total;
             <nav aria-label="Pagination">
                 <ul class="d-flex justify-content-center align-items-center my-3 pagination">
                     <li class="page-item <?= !$prevPage ? 'disabled' : '' ?>" aria-current="page">
-                        <a class="page-link" href="/news?page=<?= $prevPage ?>">&laquo;</a>
+                        <a class="page-link" href="/<?= $currentLink ?>?page=<?= $prevPage ?>">&laquo;</a>
                     </li>
                     <?php foreach ($pageNumbers as $page): ?>
                         <?php if($page == $currentPage || $page == '...'): ?>
                             <li class="page-item disabled"><a class="page-link" href="#"><?= $page ?></a></li>
                         <?php else: ?>
                             <li class="page-item active" aria-current="page">
-                                <a class="page-link" href="/news?page=<?= $page ?>"><?= $page ?></a>
+                                <a class="page-link" href="/<?= $currentLink ?>?page=<?= $page ?>"><?= $page ?></a>
                             </li>
                         <?php endif; ?>
                     <?php endforeach; ?>
                     <li class="page-item <?= !$nextPage ? 'disabled' : '' ?>" aria-current="page">
-                        <a class="page-link" href="/news?page=<?= $nextPage ?>">&raquo;</a>
+                        <a class="page-link" href="/<?= $currentLink ?>?page=<?= $nextPage ?>">&raquo;</a>
                     </li>
                 </ul>
             </nav>

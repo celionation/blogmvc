@@ -6,12 +6,12 @@ class Navigation
 {
     public static function isCurrentPage($page)
     {
-        global $currentPage;
+        global $currentLink;
         if (!empty($page) && strpos($page, ':id') > -1) {
             $page = str_replace(":id", "", $page);
-            return strpos($currentPage, $page) > -1;
+            return strpos($currentLink, $page) > -1;
         }
-        return $page == $currentPage;
+        return $page == $currentLink;
     }
 
     public static function activeClass($page, $class = '')
@@ -19,6 +19,16 @@ class Navigation
         $active = self::isCurrentPage($page);
         $class = $active ? $class . " active" : $class;
         return $class;
+    }
+
+    public static function subLink($link, $label)
+    {
+        $active = self::isCurrentPage($link);
+        $class = self::activeClass($link);
+        $linkClass = 'fw-bold text-black border-end border-1 px-2 text-capitalize';
+        $linkClass .= $active ? " active" : "";
+        $link =  '/' . $link;
+        return "<a class=\"{$linkClass}{$class}\" href=\"{$link}\" >{$label}</a>";
     }
 
     public static function navItem($link, $label, $isDropdownItem = false, $page = '')

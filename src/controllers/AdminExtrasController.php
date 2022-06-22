@@ -2,6 +2,7 @@
 
 namespace src\controllers;
 
+use core\Config;
 use core\Controller;
 use core\helpers\CoreHelpers;
 use core\Request;
@@ -15,6 +16,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use src\classes\Permission;
 use src\models\Headlines;
 use src\models\Users;
+use Symfony\Component\DomCrawler\Crawler;
 
 class AdminExtrasController extends Controller
 {
@@ -38,20 +40,36 @@ class AdminExtrasController extends Controller
     }
 
 
-    public function rss()
+    public function rss(Request $request)
     {
-//        $curl = new Curl();
-//        $curl->get('http://nattiblog.test/news');
-//
-//        if ($curl->error) {
-//            echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage . "\n";
-//        } else {
-//            echo 'Response:' . "\n";
-//            var_dump($curl->response);
-//        }
+        if ($request->isPost()) {
+            $country = $request->get('country');
+            $category = $request->get('category');
+            $search = $request->get('search');
+
+            $news = $this->newsApi($country, $category, $search);
+
+            $articleLists = $news->articles;
+
+            $news = json_decode(json_encode($articleLists), true);
+        }
+
 
         $view = [
             'errors' => [],
+            'country' => [
+                'us' => 'UNITED STATE',
+                'ng' => 'NIGERIA',
+                'in' => 'INDIA'
+            ],
+            'category' => [
+                ' ' => 'Please Select',
+                'general' => 'General',
+                'business' => 'Business',
+                'sports' => 'Sports',
+                'entertainment' => 'Entertainment',
+            ],
+            'articles' => $news ?? [],
         ];
 
         return View::make('admin/extras/rss', $view);
@@ -124,6 +142,30 @@ class AdminExtrasController extends Controller
         }
         Session::msg('Headline Deleted Successfully.', 'danger');
         Response::redirect('admin/extras/headlines');
+    }
+
+    public function newsApi($country, $category, $search)
+    {
+        if($category == '') {
+            $url = "https://newsapi.org/v2/top-headlines?country={$country}&apiKey=" . Config::get('NEWSAPI_KEY');
+        } else {
+            $url = "https://newsapi.org/v2/top-headlines?country={$country}&category={$category}&apiKey=" . Config::get('NEWSAPI_KEY');
+        }
+
+        if($search) {
+            $url = "https://newsapi.org/v2/everything?q={$search}&sortBy=publishedAt&apiKey=" . Config::get('NEWSAPI_KEY');
+        }
+
+//            $url = "https://newsapi.org/v2/top-headlines?country={$country}&category={$category}&apiKey=" . Config::get('NEWSAPI_KEY');
+
+        $curl = new Curl();
+        $curl->get($url);
+
+        if ($curl->error) {
+            echo 'Error: ' . $curl->errorCode . ': ' . $curl->errorMessage . "\n";
+        } else {
+            return $curl->response;
+        }
     }
 
 

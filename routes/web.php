@@ -24,12 +24,13 @@ use src\controllers\SiteController;
 
 $app->router->get('/', [SiteController::class, 'index']);
 $app->router->get('/news', [BlogController::class, 'news']);
+$app->router->get('/news/{id}', [BlogController::class, 'categoryNews']);
 $app->router->get('/read/{article_id}', [BlogController::class, 'read']);
 $app->router->post('/read/{article_id}', [BlogController::class, 'read']);
 $app->router->get('/contact', [BlogController::class, 'contact']);
 $app->router->post('/contact', [BlogController::class, 'contact']);
 $app->router->get('/read/articleNotFound', [BlogController::class, 'articleNotFound']);
-$app->router->post('/newsletter', [BlogController::class, 'newsletter']);
+$app->router->post('/newsletter', [SiteController::class, 'newsletter']);
 
 $app->router->get('/register', [AuthController::class, 'register']);
 $app->router->post('/register', [AuthController::class, 'register']);
@@ -39,7 +40,10 @@ $app->router->get('/logout', [AuthController::class, 'logout']);
 
 // Admin
 $app->router->get('/admin/dashboard', [AdminController::class, 'dashboard']);
+
+//rss
 $app->router->get('/admin/extras/rss', [AdminExtrasController::class, 'rss']);
+$app->router->post('/admin/extras/rss', [AdminExtrasController::class, 'rss']);
 
 //Headlines
 $app->router->get('/admin/extras/headlines', [AdminExtrasController::class, 'headlines']);
@@ -65,8 +69,11 @@ $app->router->get('/admin/delete_region/{id}', [AdminController::class, 'deleteR
 
 //User Actions
 $app->router->get('/admin/users', [AdminController::class, 'users']);
+$app->router->get('/admin/users/{role}', [AdminController::class, 'userRole']);
 $app->router->get('/admin/create_user/{id}', [AdminController::class, 'createUser']);
 $app->router->post('/admin/create_user/{id}', [AdminController::class, 'createUser']);
+$app->router->get('/admin/block_user/{id}', [AdminController::class, 'blockUser']);
+$app->router->get('/admin/delete_user/{id}', [AdminController::class, 'deleteUser']);
 
 //Comments Actions
 $app->router->get('/admin/comments', [AdminController::class, 'comments']);

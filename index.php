@@ -72,8 +72,9 @@ if (ROOT != '/') {
 $url = preg_replace('/(\?.+)/', '', $url);
 
 $currentPage = $url;
+$currentLink = $url;
 
-//\core\helpers\CoreHelpers::dnd($uploadLink);
+//\core\helpers\CoreHelpers::dnd($currentPage);
 
 require __DIR__ . '/routes/web.php';
 

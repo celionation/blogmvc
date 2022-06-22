@@ -76,40 +76,40 @@ $globalArticle = $this->globalArticle;
     <!-- __________________END OF SECOND SECTION___________________ -->
 
     <!-- ________________________THIRD SECTION___________________ -->
-    <section class="section border-bottom border-top border-3 border-danger">
+    <section class="section border-bottom border-3 border-danger container-fluid">
         <div class="row mb-3">
             <?php if($techArticle !== false): ?>
-            <article class="col-12 col-md-6 col-sm-12">
-                <h2 class="text-uppercase ms-5 mb-4 mt-2 border-bottom border-3 border-danger text-start fw-bold"><i class="fas fa-arrow-circle-right text-danger"></i> Tech</h2>
-                <div class="card position-relative overflow-hidden">
-                    <div class="mini-img">
-                        <img src="<?= $techArticle->img ?>" alt="" class="w-100 img-fluid">
+                <article class="col-6 col-md-6 col-sm-12">
+                    <h2 class="text-uppercase ms-5 mb-4 mt-2 border-bottom border-3 border-danger text-start fw-bold"><i class="fas fa-arrow-circle-right text-danger"></i> Tech</h2>
+                    <div class="card position-relative overflow-hidden">
+                        <div class="mini-img">
+                            <img src="<?= $techArticle->img ?>" alt="" class="w-100 img-fluid">
+                        </div>
+                        <div class="card-header position-absolute bottom-0 pt-4">
+                            <a href="/read/<?= $techArticle->article_id ?>" class="text-dark">
+                                <h2 class="text-shadow h1 text-capitalize border-bottom border-3 border-danger pb-2 text-white text-start">
+                                    <?= $techArticle->title ?></h2>
+                            </a>
+                        </div>
                     </div>
-                    <div class="card-header position-absolute bottom-0 pt-4">
-                        <a href="/read/<?= $techArticle->article_id ?>" class="text-dark">
-                            <h2 class="text-shadow h1 text-capitalize border-bottom border-3 border-danger pb-2 text-white text-start">
-                                <?= $techArticle->title ?></h2>
-                        </a>
-                    </div>
-                </div>
-            </article>
+                </article>
             <?php endif; ?>
 
             <?php if($storyArticle !== false): ?>
-            <article class="col-12 col-md-6 col-sm-12">
-                <h2 class="text-uppercase ms-5 mb-4 mt-2 border-bottom border-3 border-danger text-start fw-bold"> <i class="fas fa-arrow-circle-right text-danger"></i> Story</h2>
-                <div class="card position-relative overflow-hidden">
-                    <div class="mini-img">
-                        <img src="<?= $storyArticle->img ?>" alt="" class="w-100 img-fluid">
+                <article class="col-6 col-md-6 col-sm-12">
+                    <h2 class="text-uppercase ms-5 mb-4 mt-2 border-bottom border-3 border-danger text-start fw-bold"> <i class="fas fa-arrow-circle-right text-danger"></i> Story</h2>
+                    <div class="card position-relative overflow-hidden">
+                        <div class="mini-img">
+                            <img src="<?= $storyArticle->img ?>" alt="" class="w-100 img-fluid">
+                        </div>
+                        <div class="card-header position-absolute bottom-0 pt-4">
+                            <a href="/read/<?= $storyArticle->article_id ?>" class="text-dark">
+                                <h2 class="text-shadow h1 text-capitalize border-bottom border-3 border-danger pb-2 text-white text-start">
+                                    <?= $storyArticle->title ?></h2>
+                            </a>
+                        </div>
                     </div>
-                    <div class="card-header position-absolute bottom-0 pt-4">
-                        <a href="/read/<?= $storyArticle->article_id ?>" class="text-dark">
-                            <h2 class="text-shadow h1 text-capitalize border-bottom border-3 border-danger pb-2 text-white text-start">
-                                <?= $storyArticle->title ?></h2>
-                        </a>
-                    </div>
-                </div>
-            </article>
+                </article>
             <?php endif; ?>
         </div>
     </section>
@@ -117,117 +117,117 @@ $globalArticle = $this->globalArticle;
 
     <!-- ___________________________SPORT SECTION___________________ -->
     <?php if($sportsArticle): ?>
-    <section class="section">
-        <div class="row mb-3">
-            <div class="col-12">
-                <h2 class="text-uppercase ms-5 mb-4 mt-2 border-bottom border-3 border-danger text-start fw-bold"><i class="fas fa-arrow-circle-right text-danger"></i> SPORTS</h2>
-                <div class="row">
-                    <?php foreach ($sportsArticle as $spa): ?>
-                        <article class="col-12 col-lg-3 col-md-4 col-sm-6 mb-2">
-                            <div class="card position-relative overflow-hidden">
-                                <div class="mini-img">
-                                    <img src="<?= $spa->img ?>" alt="" class="w-100 img-fluid">
+        <section class="section container-fluid">
+            <div class="row mb-3">
+                <div class="col-12">
+                    <h2 class="text-uppercase ms-5 mb-4 mt-2 border-bottom border-3 border-danger text-start fw-bold"><i class="fas fa-arrow-circle-right text-danger"></i> SPORTS</h2>
+                    <div class="row">
+                        <?php foreach ($sportsArticle as $spa): ?>
+                            <article class="col-12 col-lg-3 col-md-4 col-sm-6 mb-2">
+                                <div class="card position-relative overflow-hidden">
+                                    <div class="mini-img">
+                                        <img src="<?= $spa->img ?>" alt="" class="w-100 img-fluid">
+                                    </div>
+                                    <div class="card-header position-absolute bottom-0 pt-4">
+                                        <a href="/read/<?= $spa->article_id ?>" class="text-dark">
+                                            <h2 class="text-shadow h6 text-capitalize border-bottom border-3 border-danger pb-2 text-white text-start">
+                                                <?= $spa->title ?></h2>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="card-header position-absolute bottom-0 pt-4">
-                                    <a href="/read/<?= $spa->article_id ?>" class="text-dark">
-                                        <h2 class="text-shadow h6 text-capitalize border-bottom border-3 border-danger pb-2 text-white text-start">
-                                            <?= $spa->title ?></h2>
-                                    </a>
-                                </div>
-                            </div>
-                        </article>
-                    <?php endforeach; ?>
+                            </article>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
     <?php endif; ?>
     <!-- ___________________________END OF SPORT SECTION___________________ -->
 
     <!-- ___________________________POLITICS SECTION___________________ -->
     <?php if($politicsArticle): ?>
-    <section class="section">
-        <div class="row mb-3">
-            <div class="col-12">
-                <h2 class="text-uppercase ms-5 mb-4 mt-2 border-bottom border-3 border-danger text-start fw-bold"><i class="fas fa-arrow-circle-right text-danger"></i> POLITICS</h2>
-                <div class="row">
-                    <?php foreach ($politicsArticle as $ppa): ?>
-                        <article class="col-12 col-lg-3 col-md-4 col-sm-6 mb-2">
-                            <div class="card position-relative overflow-hidden">
-                                <div class="mini-img">
-                                    <img src="<?= $ppa->img ?>" alt="" class="w-100 img-fluid">
+        <section class="section container-fluid">
+            <div class="row mb-3">
+                <div class="col-12">
+                    <h2 class="text-uppercase ms-5 mb-4 mt-2 border-bottom border-3 border-danger text-start fw-bold"><i class="fas fa-arrow-circle-right text-danger"></i> POLITICS</h2>
+                    <div class="row">
+                        <?php foreach ($politicsArticle as $ppa): ?>
+                            <article class="col-12 col-lg-3 col-md-4 col-sm-6 mb-2">
+                                <div class="card position-relative overflow-hidden">
+                                    <div class="mini-img">
+                                        <img src="<?= $ppa->img ?>" alt="" class="w-100 img-fluid">
+                                    </div>
+                                    <div class="card-header position-absolute bottom-0 pt-4">
+                                        <a href="/read/<?= $ppa->article_id ?>" class="text-dark">
+                                            <h2 class="text-shadow h6 text-capitalize border-bottom border-3 border-danger pb-2 text-white text-start">
+                                                <?= $ppa->title ?></h2>
+                                        </a>
+                                    </div>
                                 </div>
-                                <div class="card-header position-absolute bottom-0 pt-4">
-                                    <a href="/read/<?= $ppa->article_id ?>" class="text-dark">
-                                        <h2 class="text-shadow h6 text-capitalize border-bottom border-3 border-danger pb-2 text-white text-start">
-                                            <?= $ppa->title ?></h2>
-                                    </a>
-                                </div>
-                            </div>
-                        </article>
-                    <?php endforeach; ?>
+                            </article>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
     <?php endif; ?>
     <!-- ___________________________END OF POLITICS SECTION___________________ -->
 
     <!-- ___________________________Around CNB SECTION___________________ -->
     <?php if($aroundArticle): ?>
-    <section class="section">
-        <div class="row mb-3">
-            <div class="col-12">
-                <h2 class="text-uppercase ms-5 mb-4 mt-2 border-bottom border-3 border-danger text-start fw-bold"><i class="fas fa-arrow-circle-right text-danger"></i> Around CNB</h2>
-                <div class="row">
-                    <?php foreach ($aroundArticle as $aa): ?>
-                    <article class="col-12 col-lg-3 col-md-4 col-sm-6 mb-2">
-                        <div class="card position-relative overflow-hidden">
-                            <div class="mini-img">
-                                <img src="<?= $aa->img ?>" alt="" class="w-100 img-fluid">
-                            </div>
-                            <div class="card-header position-absolute bottom-0 pt-4">
-                                <a href="/read/<?= $aa->article_id ?>" class="text-dark">
-                                    <h2 class="text-shadow h6 text-capitalize border-bottom border-3 border-danger pb-2 text-white text-start">
-                                        <?= $aa->title ?></h2>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-                    <?php endforeach; ?>
+        <section class="section container-fluid">
+            <div class="row mb-3">
+                <div class="col-12">
+                    <h2 class="text-uppercase ms-5 mb-4 mt-2 border-bottom border-3 border-danger text-start fw-bold"><i class="fas fa-arrow-circle-right text-danger"></i> Around CNB</h2>
+                    <div class="row">
+                        <?php foreach ($aroundArticle as $aa): ?>
+                            <article class="col-12 col-lg-3 col-md-4 col-sm-6 mb-2">
+                                <div class="card position-relative overflow-hidden">
+                                    <div class="mini-img">
+                                        <img src="<?= $aa->img ?>" alt="" class="w-100 img-fluid">
+                                    </div>
+                                    <div class="card-header position-absolute bottom-0 pt-4">
+                                        <a href="/read/<?= $aa->article_id ?>" class="text-dark">
+                                            <h2 class="text-shadow h6 text-capitalize border-bottom border-3 border-danger pb-2 text-white text-start">
+                                                <?= $aa->title ?></h2>
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
     <?php endif; ?>
     <!-- ___________________________END OF Around CNB SECTION___________________ -->
 
     <!-- ___________________________Global SECTION___________________ -->
     <?php if($globalArticle): ?>
-    <section class="section">
-        <div class="row mb-3">
-            <div class="col-12">
-                <h2 class="text-uppercase ms-5 mb-4 mt-2 border-bottom border-3 border-danger text-start fw-bold"><i class="fas fa-arrow-circle-right text-danger"></i> Global</h2>
-                <div class="row">
-                    <?php foreach ($globalArticle as $glo): ?>
-                    <article class="col-12 col-lg-3 col-md-4 col-sm-6 mb-2">
-                        <div class="card position-relative overflow-hidden">
-                            <div class="mini-img">
-                                <img src="<?= $glo->img ?>" alt="" class="w-100 img-fluid">
-                            </div>
-                            <div class="card-header position-absolute bottom-0 pt-4">
-                                <a href="/read/<?= $glo->article_id ?>" class="text-dark">
-                                    <h2 class="text-shadow h6 text-capitalize border-bottom border-3 border-danger pb-2 text-white text-start">
-                                        <?= $glo->title ?></h2>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-                    <?php endforeach; ?>
+        <section class="section container-fluid">
+            <div class="row mb-3">
+                <div class="col-12">
+                    <h2 class="text-uppercase ms-5 mb-4 mt-2 border-bottom border-3 border-danger text-start fw-bold"><i class="fas fa-arrow-circle-right text-danger"></i> Global</h2>
+                    <div class="row">
+                        <?php foreach ($globalArticle as $glo): ?>
+                            <article class="col-12 col-lg-3 col-md-4 col-sm-6 mb-2">
+                                <div class="card position-relative overflow-hidden">
+                                    <div class="mini-img">
+                                        <img src="<?= $glo->img ?>" alt="" class="w-100 img-fluid">
+                                    </div>
+                                    <div class="card-header position-absolute bottom-0 pt-4">
+                                        <a href="/read/<?= $glo->article_id ?>" class="text-dark">
+                                            <h2 class="text-shadow h6 text-capitalize border-bottom border-3 border-danger pb-2 text-white text-start">
+                                                <?= $glo->title ?></h2>
+                                        </a>
+                                    </div>
+                                </div>
+                            </article>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
     <?php endif; ?>
     <!-- ___________________________END OF Global SECTION___________________ -->
 </main>
