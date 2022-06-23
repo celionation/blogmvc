@@ -81,8 +81,8 @@ $app->router->get('/admin/comment_delete/{id}', [AdminController::class, 'commen
 $app->router->get('/admin/comment_view/{id}', [AdminController::class, 'commentView']);
 
 // Setting Actions
-$app->router->get('/admin/settings', [AdminController::class, 'settings']);
-$app->router->post('/admin/settings', [AdminController::class, 'settings']);
+$app->router->get('/admin/settings/{id}', [AdminController::class, 'settings']);
+$app->router->post('/admin/settings/{id}', [AdminController::class, 'settings']);
 
 $app->router->get('/admin/settings/social', [AdminController::class, 'socialSettings']);
 $app->router->post('/admin/settings/social', [AdminController::class, 'socialSettings']);

@@ -74,7 +74,7 @@ use core\helpers\Navigation;
                 </ul>
             </li>
 
-            <?= Navigation::navItemIcon('admin/settings', 'Settings', 'fa fa-fw fa-cog') ?>
+            <?= Navigation::navItemIcon('admin/settings/new', 'Settings', 'fa fa-fw fa-cog') ?>
         </ul>
         <!-- End of Side Bar -->
 

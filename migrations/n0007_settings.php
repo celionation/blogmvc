@@ -21,21 +21,11 @@ class n0007_settings
             created_at DATETIME NULL DEFAULT CURRENT_TIMESTAMP ,
             updated_at DATETIME NULL ,
             `setting_id` VARCHAR(10) NULL, 
-            `name` VARCHAR(100) NULL, 
-            `value_one` VARCHAR(255) NULL, 
-            `status_one` TINYINT(1) NOT NULL DEFAULT '0',
-            `value_two` VARCHAR(255) NULL, 
-            `status_two` TINYINT(1) NOT NULL DEFAULT '0',
-            `value_three` VARCHAR(255) NULL, 
-            `status_three` TINYINT(1) NOT NULL DEFAULT '0',
-            `value_four` VARCHAR(255) NULL, 
-            `status_four` TINYINT(1) NOT NULL DEFAULT '0',
-            `value_five` VARCHAR(255) NULL, 
-            `status_five` TINYINT(1) NOT NULL DEFAULT '0',
-            `value_six` VARCHAR(255) NULL, 
-            `status_six` TINYINT(1) NOT NULL DEFAULT '0', 
+            `option` VARCHAR(100) NULL, 
+            `value` VARCHAR(255) NULL,
+            blocked VARCHAR(10) NOT NULL DEFAULT 'Activate' ,
             PRIMARY KEY (`id`),
-            INDEX `name` (`name`)
+            INDEX `option` (`option`)
             ) ENGINE = InnoDB;";
         $db->_dbh->exec($SQL);
     }

@@ -551,37 +551,47 @@ class AdminController extends Controller
     {
         Permission::permRedirect(['admin', 'author'], 'admin/dashboard');
 
-        $settings = new Settings();
+        $id = $request->getParam('id');
 
-        if($request->isPost()) {
+        if ($id == 'new') {
+            $setting = new Settings();
+        } else {
+            $setting = Settings::findById($id);
+        }
+
+        if (!$setting) {
+            Session::msg("You do not have permission to edit this Setting", "info");
+            Response::redirect('admin/settings/new');
+        }
+
+        $params = [
+            'order' => 'id DESC'
+        ];
+        $params = Settings::mergeWithPagination($params);
+
+        if ($request->isPost()) {
             Session::csrfCheck();
+            $setting->option = $request->get('option');
+            $setting->value = $request->get('value');
+            $setting->blocked = $request->get('blocked');
+            $setting->setting_id = GenerateToken::randomString(6);
 
-            $settings->setting_id = GenerateToken::randomString(6);
-            $settings->name = 'info';
-            $settings->value_one = $request->get('value_one');
-            $settings->value_two = $request->get('value_two');
-            $settings->value_three = $request->get('value_three');
-            $settings->value_four = $request->get('value_four');
-
-            $upload = new FileUpload('logo');
-
-            $upload->directory('uploads/settings');
-
-            if($settings->save()) {
-                if(!empty($upload->tmp)) {
-                    if($upload->upload()) {
-                        $settings->value_three = $upload->fc;
-                        $settings->save();
-                    }
-                }
-                Session::msg('Saved!', 'success');
-                Response::redirect('admin/settings/info');
+            if ($setting->save()) {
+                Session::msg('Setting Saved Successfully', 'success');
+                Response::redirect('admin/settings/new');
             }
         }
 
         $view = [
-            'errors' => $settings->getErrors(),
-            'setting' => $settings::findFirst(),
+            'errors' => $setting->getErrors(),
+            'setting' => $setting,
+            'settings' => $setting::find($params),
+            'blocked' => [
+                Settings::SETTING_ACTIVATE => 'Active',
+                Settings::SETTING_DEACTIVATE => 'Deactivate'
+            ],
+            'heading' => $id === 'new' ? "Create" : "Edit Region",
+            'btn' => $id === 'new' ? "Create" : "Update",
         ];
 
         return View::make('admin/settings/settings', $view);
