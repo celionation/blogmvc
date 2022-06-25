@@ -5,6 +5,9 @@ namespace src\controllers;
 use core\Config;
 use core\Controller;
 use core\helpers\CoreHelpers;
+use core\helpers\FileUpload;
+use core\helpers\GenerateToken;
+use core\helpers\TimeFormat;
 use core\Request;
 use core\Response;
 use core\Session;
@@ -14,6 +17,7 @@ use GuzzleHttp\Client;
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use src\classes\Permission;
+use src\models\Adverts;
 use src\models\Headlines;
 use src\models\Users;
 use Symfony\Component\DomCrawler\Crawler;
@@ -166,6 +170,92 @@ class AdminExtrasController extends Controller
         } else {
             return $curl->response;
         }
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function adverts(): View
+    {
+        Permission::permRedirect(['admin', 'author'], 'admin/dashboard');
+
+        $view = [
+            'errors' => [],
+        ];
+
+        return View::make('admin/extras/adverts', $view);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function createAdverts(Request $request): View
+    {
+        Permission::permRedirect(['admin', 'author'], 'admin/dashboard');
+        
+        $id = $request->getParam('id');
+
+        if ($id == 'new') {
+            $adverts = new Adverts();
+        } else {
+            $adverts = Adverts::findById($id);
+        }
+
+        if (!$adverts) {
+            Session::msg("You do not have permission to edit this adverts", "info");
+            Response::redirect('admin/extras/adverts/new');
+        }
+
+        if($request->isPost()) {
+            Session::csrfCheck();
+            $adverts->name = $request->get('name');
+            $adverts->ads_img = $request->get('ads_img');
+            $adverts->ads_img_link = $request->get('ads_img_link');
+            $adverts->ads_link = $request->get('ads_link');
+            $adverts->ads_label = $request->get('ads_label');
+            $adverts->status = $request->get('status');
+            $adverts->expired_in = $request->get('expired_in');
+
+            $upload = new FileUpload('ads_img');
+
+            $upload->directory('uploads/adverts');
+
+            if ($adverts->save()) {
+                if(!empty($upload->tmp)) {
+                    if($upload->upload()) {
+                        $adverts->ads_img = $upload->fc;
+                        $adverts->save();
+                    }
+                }
+                Session::msg("Adverts was saved Successfully!.", 'success');
+                Response::redirect('admin/extras/adverts/new');
+            }
+        }
+
+        $view = [
+            'errors' => $adverts->getErrors(),
+            'labelsOpt' => [
+                '' => 'Please Select',
+                Adverts::MAIN_ADS => 'Main',
+                Adverts::SUB_ADS => 'Sub',
+            ],
+            'statusOpt' => [
+                '' => '___Please Select___',
+                'active' => 'Active',
+                'inactive' => 'Inactive',
+                'expired' => 'Expired',
+            ],
+            'expOpt' => [
+                '' => '__Please Select__',
+                'one week' => 'One Week',
+                'two week' => 'Two Week',
+                'three week' => 'Three Week',
+                'one month' => 'One Month',
+                'three months' => 'Three Months',
+            ],
+        ];
+
+        return View::make('admin/extras/newAdverts', $view);
     }
 
 

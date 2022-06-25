@@ -2,6 +2,8 @@
 
 namespace core\helpers;
 
+use Exception;
+
 /**
  * Class TimeFormat
  *
@@ -129,5 +131,14 @@ class TimeFormat
     public static function DateOne($timeStamp): string
     {
         return date("j-M-Y", strtotime($timeStamp));
+    }
+
+    /**
+     * @throws Exception
+     */
+    public static function ConvertStringDate($dateStr): string
+    {
+        $date = new \DateTime($dateStr);
+        return $date->format('Y-m-d');
     }
 }

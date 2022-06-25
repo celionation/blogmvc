@@ -42,8 +42,9 @@ $app->router->get('/logout', [AuthController::class, 'logout']);
 $app->router->get('/admin/dashboard', [AdminController::class, 'dashboard']);
 
 //rss
-$app->router->get('/admin/extras/rss', [AdminExtrasController::class, 'rss']);
-$app->router->post('/admin/extras/rss', [AdminExtrasController::class, 'rss']);
+$app->router->get('/admin/extras/adverts', [AdminExtrasController::class, 'adverts']);
+$app->router->get('/admin/extras/adverts/{id}', [AdminExtrasController::class, 'createAdverts']);
+$app->router->post('/admin/extras/adverts/{id}', [AdminExtrasController::class, 'createAdverts']);
 
 //Headlines
 $app->router->get('/admin/extras/headlines', [AdminExtrasController::class, 'headlines']);

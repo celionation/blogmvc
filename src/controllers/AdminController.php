@@ -590,7 +590,7 @@ class AdminController extends Controller
                 Settings::SETTING_ACTIVATE => 'Active',
                 Settings::SETTING_DEACTIVATE => 'Deactivate'
             ],
-            'heading' => $id === 'new' ? "Create" : "Edit Region",
+            'heading' => $id === 'new' ? "Create" : "Edit Setting",
             'btn' => $id === 'new' ? "Create" : "Update",
         ];
 

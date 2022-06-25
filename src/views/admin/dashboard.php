@@ -13,6 +13,6 @@ $this->title = 'Admin Dashboard';
     <h2>Dashboard</h2>
     <div>
         <a class="btn btn-sm btn-primary" href="/admin/extras/headlines"><i class="fas fa-bullhorn"></i> Headlines</a>
-        <a class="btn btn-sm btn-warning" href="/admin/extras/rss"><i class="fas fa-rss"></i> RSS Feeds</a>
+        <a class="btn btn-sm btn-warning" href="/admin/extras/adverts"><i class="fas fa-rss"></i> Adverts</a>
     </div>
 </div>

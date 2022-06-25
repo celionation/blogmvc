@@ -15,6 +15,7 @@ use core\helpers\Navigation;
     </button>
     <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+            <span class="my-1"></span>
             <?= Navigation::navItemIcon('admin/dashboard', 'Dashboard', 'fa fa-fw fa-dashboard') ?>
             <li class="nav-item" data-bs-toggle="tooltip" data-placement="right" title="Articles">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#article" data-parent="#exampleAccordion">

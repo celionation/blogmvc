@@ -16,11 +16,11 @@ $globalArticle = $this->globalArticle;
 <?= partials('partials/welcome') ?>
 <main class="container-fluid mt-2">
     <!-- Page header with logo and tagline-->
-    <header class="py-5 bg-light border-bottom mb-4">
+    <header class="py-5 bg-light border-bottom mb-4" id="homeBanner">
         <div class="container">
             <div class="text-center my-5">
                 <h1 class="fw-bolder">Welcome to Blog Home!</h1>
-                <p class="lead mb-0">A Bootstrap 5 starter layout for your next blog homepage</p>
+                <p class="mb-0 lead">A Bootstrap 5 starter layout for your next blog homepage</p>
             </div>
         </div>
     </header>
